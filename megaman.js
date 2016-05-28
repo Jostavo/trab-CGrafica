@@ -18,6 +18,7 @@ renderer.render(scene, camera);
 function init() {
   var ScreenWidth, ScreenHeight;
   var viewAngle = 40;
+  var aspect;
   var near = 1;
   var far = 100;
 
@@ -28,6 +29,8 @@ function init() {
 
     ScreenWidth = window.innerWidth;
     ScreenHeight = window.innerHeight;
+
+    aspect = ScreenWidth/ScreenHeight;
 
     camera = new THREE.PerspectiveCamera(viewAngle, aspect, near, far);
     scene.add(camera);
