@@ -19,10 +19,11 @@ function init() {
   var ScreenWidth = 800, ScreenHeight = 600;
   var viewAngle = 30;
   var near = 0.1;
-  var far = 10000;
+  var far = 50000;
 
-    loader.load('sprites/background/background.png', function(t){backgroundTexture = t;});
-    loader.load('sprites/background/foreground.png', function(t){foregroundTexture = t});
+    // loader.load('sprites/background/bg.png', function(t){backgroundTexture = t});
+    backgroundTexture = new THREE.ImageUtils.loadTexture('sprites/background/novobg.png');
+    foregroundTexture = new THREE.ImageUtils.loadTexture('sprites/background/foreground.png');
 
     // ScreenWidth = window.innerWidth;
     // ScreenHeight = window.innerHeight;
@@ -43,20 +44,21 @@ function init() {
     controls = new THREE.OrbitControls(camera, renderer.domElement);
 
     backgroundMaterial = new THREE.MeshBasicMaterial( { map: backgroundTexture, side: THREE.DoubleSide } );
-    foregroundMaterial = new THREE.MeshBasicMaterial( { map: foregroundTexture, side: THREE.DoubleSide } );
+    foregroundMaterial = new THREE.MeshBasicMaterial( { map: foregroundTexture, side: THREE.DoubleSide, transparent: true } );
 
-    backgroundPlane = new THREE.PlaneGeometry( 10,10 );
-    foregroundPlane = new THREE.PlaneGeometry( 10,10 );
+    backgroundPlane = new THREE.PlaneGeometry( 4693,460,1,1 );
+    foregroundPlane = new THREE.PlaneGeometry( 7680,460,1,1 );
 
     background = new THREE.Mesh(backgroundPlane, backgroundMaterial);
     foreground = new THREE.Mesh(foregroundPlane, foregroundMaterial);
-    background.position.set(0,0,0);
-    foreground.position.set(0,0,-10);
+    background.position.set(-550,0,0);
+    background.scale.set(1.5,1.5,1.5);
+    foreground.position.set(0,0,10);
 
     scene.add(background);
     scene.add(foreground);
 
-    var axes = new THREE.AxisHelper(100);
+    var axes = new THREE.AxisHelper(1000);
 	  scene.add( axes );
 
     // renderer.setClearColor( new THREE.Color(0xffffff), 1);
@@ -73,6 +75,5 @@ function animate()
 
 function update()
 {
-	controls.update();
-	stats.update();
+	  controls.update();
 }
