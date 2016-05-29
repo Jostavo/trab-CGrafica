@@ -13,53 +13,49 @@ var backgroundMaterial, foregroundMaterial;
 var clock = new THREE.Clock();
 
 init();
-renderer.render(scene, camera);
 
 function init() {
-  var ScreenWidth, ScreenHeight;
-  var viewAngle = 40;
-  var aspect;
-  var near = 1;
-  var far = 100;
+  var ScreenWidth = 800, ScreenHeight = 600;
+  var viewAngle = 30;
+  var near = 0.1;
+  var far = 10000;
 
-    backgroundTexture = loader.load( 'sprites/background/background.png' );
-    foregroundTexture = loader.load( 'sprites/background/foreground.png' );
+    loader.load('sprites/background/caixa.png', function(t){backgroundTexture = t;});
+    foregroundTexture = loader.load('sprites/background/foreground.png');
 
-    scene = new THREE.Scene();
+    // ScreenWidth = window.innerWidth;
+    // ScreenHeight = window.innerHeight;
 
-    ScreenWidth = window.innerWidth;
-    ScreenHeight = window.innerHeight;
-
-    aspect = ScreenWidth/ScreenHeight;
-
-    camera = new THREE.PerspectiveCamera(viewAngle, aspect, near, far);
-    scene.add(camera);
-    camera.position.set(10,0,0);
-    camera.lookAt(scene.position);
-
-	  renderer = new THREE.WebGLRenderer( {antialias:true} );
+    renderer = new THREE.WebGLRenderer();
     renderer.setSize(ScreenWidth, ScreenHeight);
 
     container = document.getElementById('ThreeJS');
 	  container.appendChild( renderer.domElement );
 
-    // controls = new THREE.MMXControls(camera, renderer.domElement);
+    scene = new THREE.Scene();
 
-    // var light = new THREE.PointLight(0xffffff);
-	  // light.position.set(100,250,100);
-	  // scene.add(light)
+    camera = new THREE.PerspectiveCamera(viewAngle, ScreenWidth/ScreenHeight, near, far);
+    scene.add(camera);
+    camera.position.set(-50,0,60);
+    camera.lookAt(scene.position);
+
+    // controls = new THREE.MMXControls(camera, renderer.domElement);
 
     backgroundMaterial = new THREE.MeshBasicMaterial( { map: backgroundTexture, side: THREE.DoubleSide } );
     foregroundMaterial = new THREE.MeshBasicMaterial( { map: foregroundTexture, side: THREE.DoubleSide } );
 
-    backgroundPlane = new THREE.PlaneGeometry( 3545,352 );
-    foregroundPlane = new THREE.PlaneGeometry( 7680,460 );
+    backgroundPlane = new THREE.PlaneGeometry( 10,10 );
+    foregroundPlane = new THREE.PlaneGeometry( 10,10 );
 
     background = new THREE.Mesh(backgroundPlane, backgroundMaterial);
     foreground = new THREE.Mesh(foregroundPlane, foregroundMaterial);
-    background.position.set(1,1,1);
-    foreground.position.set(1,1,1);
+    background.position.set(0,0,0);
+    foreground.position.set(10,10,-10);
 
     scene.add(background);
     scene.add(foreground);
+
+    // renderer.setClearColor( new THREE.Color(0xffffff), 1);
+
+    renderer.render(scene, camera);
 }
