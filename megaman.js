@@ -1,16 +1,19 @@
-var megaman = {x: 0, y: 0, hp: 16};
+var megaman = {x: 0, y: 0, z: 0, hp: 16};
 var mobs = [];
 
-var scene, camera, renderer, keyboard, animation;
+var scene, camera, renderer, keyboard;
+var animation, animationPic;
+var updateClock;
 
 var background, foreground;
 var backgroundTexture, foregroundTexture;
 var backgroundPlane, foregroundPlane;
 var backgroundMaterial, foregroundMaterial;
-var megamanImg;
-var megamanTexture;
+var megamanImg, wmegamanImg;
+var megamanTexture, wmegamanTexture;
 var megamanPlane;
-var megamanMaterial;
+var megamanMaterial, wmegamanMaterial;
+var standingClock = 30, runningClock = 450;
 
 var esquerda = false;
 
@@ -28,7 +31,12 @@ function init() {
   var far = 2000;
 
     backgroundTexture = new THREE.ImageUtils.loadTexture('sprites/background/novobg.png');
-    megamanTexture = new THREE.ImageUtils.loadTexture('sprites/mmx/mmx.png');
+    megamanTexture = new THREE.ImageUtils.loadTexture('sprites/mmx/standingmmx.png');
+    megamanTexture.minFilter = THREE.LinearFilter;
+    wmegamanTexture = new THREE.ImageUtils.loadTexture('sprites/mmx/walkingmmx.png');
+    wmegamanTexture.minFilter = THREE.LinearFilter;
+    megamanAnim = new TextureAnimator(megamanTexture, 1, 3, 3, 30);
+    wmegamanAnim = new TextureAnimator(wmegamanTexture, 1, 11, 11, 30);
     foregroundTexture = new THREE.ImageUtils.loadTexture('sprites/background/foreground.png');
 
     renderer = new THREE.WebGLRenderer();
@@ -46,6 +54,7 @@ function init() {
 
     backgroundMaterial = new THREE.MeshBasicMaterial( { map: backgroundTexture, side: THREE.DoubleSide, transparent: true } );
     megamanMaterial = new THREE.MeshBasicMaterial( { map: megamanTexture, side: THREE.DoubleSide, transparent: true} );
+    wmegamanMaterial = new THREE.MeshBasicMaterial( { map: wmegamanTexture, side: THREE.DoubleSide, transparent: true} );
     foregroundMaterial = new THREE.MeshBasicMaterial( { map: foregroundTexture, side: THREE.DoubleSide, transparent: true } );
 
     backgroundPlane = new THREE.PlaneGeometry( 4693,460,1,1 );
@@ -54,18 +63,25 @@ function init() {
 
     background = new THREE.Mesh(backgroundPlane, backgroundMaterial);
     megamanImg = new THREE.Mesh(megamanPlane, megamanMaterial);
+    wmegamanImg = new THREE.Mesh(megamanPlane, wmegamanMaterial);
     foreground = new THREE.Mesh(foregroundPlane, foregroundMaterial);
 
     background.position.set(-550,0,0);
     background.scale.set(1.5,1,1);
     megamanImg.position.set(-3730, 119, 30);
     megamanImg.scale.set(0.035,0.035,0.035);
-    megaman.x = -3715;
+    wmegamanImg.position.set(-3730, 119, 30);
+    wmegamanImg.scale.set(0.035,0.035,0.035);
+    animationPic = megamanImg;
+    animation = megamanAnim;
+    updateClock = standingClock;
+    megaman.x = -3730;
     megaman.y = 119;
+    megaman.z = 30;
     foreground.position.set(0,0,20);
 
     scene.add(background);
-    scene.add(megamanImg);
+    scene.add(animationPic);
     scene.add(foreground);
 
     // renderer.setClearColor( new THREE.Color(0xffffff), 1);
@@ -82,31 +98,48 @@ function animate()
 
 function update()
 {
+  var delta = clock.getDelta();
+  var moveDistance = 50 * delta;
+
   keyboard.update();
+  animation.update(updateClock * delta);
 
-  var moveDistance = 50 * clock.getDelta();
+  megaman.x = animationPic.position.x;
+  megaman.y = animationPic.position.y;
+  megaman.z = animationPic.position.z;
 
-  if ( keyboard.pressed("A") ){
+  if ( keyboard.down("A") || keyboard.pressed("A") ){
     if(esquerda == false){
       esquerda = true;
-      megamanImg.scale.x *= -1;
+      animationPic.scale.x *= -1;
     }
+    changeAnim(wmegamanAnim, wmegamanImg, runningClock);
 
-    if(camera.position.x > -3730 && megamanImg.position.x <= camera.position.x)
+    if(camera.position.x > -3730 && animationPic.position.x <= camera.position.x)
       camera.translateX( -moveDistance );
-    if(megamanImg.position.x > -3775)
-      megamanImg.translateX( -moveDistance );
+    if(animationPic.position.x > -3775)
+      animationPic.translateX( -moveDistance );
   }
 
-  if ( keyboard.pressed("D") ){
+  if ( keyboard.down("D") || keyboard.pressed("D") ){
     if(esquerda == true){
       esquerda = false;
-      megamanImg.scale.x *= -1;
+      animationPic.scale.x *= -1;
     }
+    changeAnim(wmegamanAnim, wmegamanImg, runningClock);
 
-    if( !(megamanImg.position.x < camera.position.x) )
+    if( !(animationPic.position.x < camera.position.x) )
       camera.translateX(  moveDistance );
-    megamanImg.translateX( moveDistance );
+    animationPic.translateX( moveDistance );
+  }
+
+  if( keyboard.up("A") || keyboard.up("D") ) {
+    changeAnim(megamanAnim, megamanImg, standingClock);
+    if( keyboard.up("A") && esquerda == false)
+    {
+      animationPic.scale.x *= -1;
+      esquerda = true;
+    }
   }
 }
 
@@ -147,4 +180,23 @@ function TextureAnimator(texture, tilesHoriz, tilesVert, numTiles, tileDispDurat
 			texture.offset.y = currentRow / this.tilesVertical;
 		}
 	};
+}
+
+function changeAnim(novaAnim, novaImg, clockzin)
+{
+    if(esquerda == true)
+      animationPic.scale.x *= -1;
+
+    megaman.x = animationPic.position.x;
+    megaman.y = animationPic.position.y;
+    megaman.z = animationPic.position.z;
+    scene.remove(animationPic);
+
+    animation = novaAnim;
+    animationPic = novaImg;
+    updateClock = clockzin;
+    esquerda = false;
+
+    animationPic.position.set(megaman.x,megaman.y,megaman.z);
+    scene.add(animationPic);
 }
