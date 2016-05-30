@@ -109,11 +109,11 @@ function update()
   megaman.z = animationPic.position.z;
 
   if ( keyboard.down("A") || keyboard.pressed("A") ){
+    changeAnim(wmegamanAnim, wmegamanImg, runningClock);
     if(esquerda == false){
       esquerda = true;
       animationPic.scale.x *= -1;
     }
-    changeAnim(wmegamanAnim, wmegamanImg, runningClock);
 
     if(camera.position.x > -3730 && animationPic.position.x <= camera.position.x)
       camera.translateX( -moveDistance );
@@ -122,11 +122,11 @@ function update()
   }
 
   if ( keyboard.down("D") || keyboard.pressed("D") ){
+    changeAnim(wmegamanAnim, wmegamanImg, runningClock);
     if(esquerda == true){
       esquerda = false;
       animationPic.scale.x *= -1;
     }
-    changeAnim(wmegamanAnim, wmegamanImg, runningClock);
 
     if( !(animationPic.position.x < camera.position.x) )
       camera.translateX(  moveDistance );
@@ -135,8 +135,7 @@ function update()
 
   if( keyboard.up("A") || keyboard.up("D") ) {
     changeAnim(megamanAnim, megamanImg, standingClock);
-    if( keyboard.up("A") && esquerda == false)
-    {
+    if( keyboard.up("A") && esquerda == false){
       animationPic.scale.x *= -1;
       esquerda = true;
     }
