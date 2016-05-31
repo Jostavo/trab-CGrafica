@@ -116,6 +116,7 @@ function update()
     changeAnim(walkMegamanAnim, walkMegaman, runningClock);
     // Volta a textura caso ela esteja para a esquerda
     if(animEsquerda == true){
+      window.alert(esquerda);
       changeSide();
     }
 
@@ -128,8 +129,10 @@ function update()
   // Quando o usuário solta a tecla de andar, a animação volta para a Standing MegaMan
   if( keyboard.up("A") || keyboard.up("D") ) {
     changeAnim(standMegamanAnim, standMegaman, standingClock);
-    if( keyboard.up("A") && animEsquerda == false){
-      changeSide();
+    if( keyboard.up("A")){
+      if(animEsquerda == false){
+        changeSide();
+      }
     }
   }
 }
