@@ -75,10 +75,10 @@ function changeSide()
 {
 	if(animEsquerda == true){
 		animEsquerda = false;
-      	animationPic.scale.x *= -1;
+  	animationPic.scale.x *= -1;
 	}else{
 		animEsquerda = true;
-      	animationPic.scale.x *= -1;
+  	animationPic.scale.x *= -1;
 	}
 }
 

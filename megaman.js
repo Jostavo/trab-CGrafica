@@ -100,7 +100,9 @@ function update()
     // Muda pra animação Walking MegaMan
     changeAnim(walkMegamanAnim, walkMegaman, runningClock);
     // Caso a textura não esteja virada para a esquerda, vira
-    changeSide();
+    if(animEsquerda == false){
+      changeSide();
+    }
 
     // Verifica colisão com a parede do lado esquerdo e controla a câmera (para a câmera não passar dos limites)
     if(camera.position.x > -3730 && animationPic.position.x <= camera.position.x)
@@ -113,7 +115,9 @@ function update()
     // Muda a animação pra Walking MegaMan
     changeAnim(walkMegamanAnim, walkMegaman, runningClock);
     // Volta a textura caso ela esteja para a esquerda
-    changeSide();
+    if(animEsquerda == true){
+      changeSide();
+    }
 
     // Verifica se o Megaman já voltou para a posição central, assim volta a mexer a câmera
     if( !(animationPic.position.x < camera.position.x) )
