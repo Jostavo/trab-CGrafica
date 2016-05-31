@@ -116,7 +116,6 @@ function update()
     changeAnim(walkMegamanAnim, walkMegaman, runningClock);
     // Volta a textura caso ela esteja para a esquerda
     if(animEsquerda == true){
-      window.alert(esquerda);
       changeSide();
     }
 
