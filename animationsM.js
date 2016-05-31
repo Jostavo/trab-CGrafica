@@ -11,7 +11,7 @@ var standingClock = 30, runningClock = 450;
 function initAnim(x, y, z)
 {
     // Esse código impede que o threeJS redimensione as imagens, bugando o animator
-	standMegamanTexture = new THREE.ImageUtils.loadTexture('sprites/mmx/standingmmx.png');
+		standMegamanTexture = new THREE.ImageUtils.loadTexture('sprites/mmx/standingmmx.png');
     standMegamanTexture.minFilter = THREE.LinearFilter;
     walkMegamanTexture = new THREE.ImageUtils.loadTexture('sprites/mmx/walkingmmx.png');
     walkMegamanTexture.minFilter = THREE.LinearFilter;
@@ -37,9 +37,9 @@ function initAnim(x, y, z)
     animationPic = standMegaman;
     animation = standMegamanAnim;
     updateClock = standingClock;
-    megaman.x = this.x;
-    megaman.y = this.y;
-    megaman.z = this.z;
+    megaman.x = x;
+    megaman.y = y;
+    megaman.z = z;
     animationPic.position.set(megaman.x, megaman.y, megaman.z);
 }
 
