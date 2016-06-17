@@ -88,7 +88,7 @@ function update()
   var moveDistance = 50 * delta; // Distância de movimento
 
   keyboard.update(); // Aqui recebe as atualizações do teclado
-  animation.update(updateClock * delta); // Aqui acontecem os updates das animações
+  animation.update(updateClock); // Aqui acontecem os updates das animações
 
   // Salva a posição do megaman no dado momento
   megaman.x = animationPic.position.x;

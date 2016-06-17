@@ -6,7 +6,7 @@ var standMegamanMaterial, walkMegamanMaterial, jumpMegamanMaterial, dashMegamanM
 var standMegamanAnim, walkMegamanAnim, jumpMegamanAnim, dashMegamanAnim;
 
 var animEsquerda = false;
-var standingClock = 150, runningClock = 450;
+var standingClock = 30, runningClock = 450;
 
 function initAnim(x, y, z)
 {
