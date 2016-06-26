@@ -1,9 +1,9 @@
 var megaman = {x: 0, y: 0, z: 0, hp: 16};
 var megamanPlane;
-var standMegaman, walkMegaman, jumpMegaman, dashMegaman;
-var standMegamanTexture, walkMegamanTexture, jumpMegamanTexture, dashMegamanTexture;
-var standMegamanMaterial, walkMegamanMaterial, jumpMegamanMaterial, dashMegamanMaterial;
-var standMegamanAnim, walkMegamanAnim, jumpMegamanAnim, dashMegamanAnim;
+var standMegaman, walkMegaman, jumpMegaman, dashMegaman, pewpewMegaman, shot, shotPopping;
+var standMegamanTexture, walkMegamanTexture, jumpMegamanTexture, dashMegamanTexture, pewpewMegamanTexture, shotTexture, shotPoppingTexture;
+var standMegamanMaterial, walkMegamanMaterial, jumpMegamanMaterial, dashMegamanMaterial, pewpewMegamanMaterial, shotMaterial, shotPoppingMaterial;
+var standMegamanAnim, walkMegamanAnim, jumpMegamanAnim, dashMegamanAnim, pewpewMegamanAnim, shotAnim, shotPoppingAnim;
 
 var animEsquerda = false;
 var standingClock = 30, runningClock = 450;
@@ -15,14 +15,31 @@ function initAnim(x, y, z)
     standMegamanTexture.minFilter = THREE.LinearFilter;
     walkMegamanTexture = new THREE.ImageUtils.loadTexture('sprites/mmx/walkingmmx.png');
     walkMegamanTexture.minFilter = THREE.LinearFilter;
+		//megaman atirando
+		pewpewMegamanTexture = new THREE.ImageUtils.loadTexture('sprites/mmx/shootingmmx.png');
+    pewpewMegamanTexture.minFilter = THREE.LinearFilter;
+		//tiro & tiro explodindo
+		shotTexture = new THREE.ImageUtils.loadTexture('sprites/mmx/shot1.png');
+		shotTexture.minFilter = THREE.LinearFilter;
+		shotPoppingTexture = THREE.ImageUtils.loadTexture('sprites/mmx/shot_pop.png');
+		shotPoppingTexture.minFilter = THREE.LinearFilter;
 
     // Aqui a gente cria os animators pra cada parte do programa
     standMegamanAnim = new TextureAnimator(standMegamanTexture, 1, 3, 3, 30);
     walkMegamanAnim = new TextureAnimator(walkMegamanTexture, 1, 11, 11, 30);
+		//novas animações
+		pewpewMegamanAnim = new TextureAnimator(pewpewMegamanTexture, 1, 1, 1, 30);
+		shotAnim = new TextureAnimator(shotTexture, 1, 1, 1, 30);
+		shotPoppingAnim = new TextureAnimator(shotPoppingTexture, 1, 3, 3, 30);
 
     // Aqui cria-se os Meshes
     standMegamanMaterial = new THREE.MeshBasicMaterial( { map: standMegamanTexture, side: THREE.DoubleSide, transparent: true} );
     walkMegamanMaterial = new THREE.MeshBasicMaterial( { map: walkMegamanTexture, side: THREE.DoubleSide, transparent: true} );
+		//novos Meshes
+		pewpewMegamanMaterial = new THREE.MeshBasicMaterial( { map: pewpewMegamanTexture, side: THREE.DoubleSide, transparent: true} );
+		shotMaterial = new THREE.MeshBasicMaterial( { map: shotTexture, side: THREE.DoubleSide, transparent: true} );
+		shotPoppingMaterial = new THREE.MeshBasicMaterial( { map: shotPoppingMaterial, side: THREE.DoubleSide, transparent: true} );
+
 
     // E o plano
     megamanPlane = new THREE.PlaneGeometry( 600,679 );
@@ -30,11 +47,16 @@ function initAnim(x, y, z)
     // Aqui mescla-se os planos com os materiais
     standMegaman = new THREE.Mesh(megamanPlane, standMegamanMaterial);
     walkMegaman = new THREE.Mesh(megamanPlane, walkMegamanMaterial);
+		pewpewMegaman = new THREE.Mesh(megamanPlane, pewpewMegamanMaterial);
+		shot = new THREE.Mesh(megamanPlane, shotMaterial);
+		shotPopping = new THREE.Mesh(megamanPlane, shotPoppingMaterial);
 
     // Aqui inicializa-se as variáveis
     standMegaman.scale.set(0.035,0.035,0.035);
     walkMegaman.scale.set(0.035,0.035,0.035);
-    animationPic = standMegaman;
+		pewpewMegaman.scale.set(0.035,0.035,0.035);
+
+		animationPic = standMegaman;
     animation = standMegamanAnim;
     updateClock = standingClock;
     megaman.x = x;
@@ -66,6 +88,28 @@ function changeAnim(novaAnim, novaImg, clockzin)
 
     // Seta na nova animação a localização da antiga
     animationPic.position.set(megaman.x,megaman.y,megaman.z);
+    // Adiciona na cena
+    scene.add(animationPic);
+}
+
+//apenas usada para mostrar o megaman para o lado direito
+function changeAnim2(novaAnim, novaImg, clockzin)
+{
+    // Salva as coordenadas
+    megaman.x = animationPic.position.x;
+    megaman.y = animationPic.position.y;
+    megaman.z = animationPic.position.z;
+    // Remove da cena
+    scene.remove(animationPic);
+
+    // Muda a animação que irá aparecer
+    animation = novaAnim;
+    animationPic = novaImg;
+    updateClock = clockzin;
+
+    // Seta na nova animação a localização da antiga
+    animationPic.position.set(megaman.x,megaman.y,megaman.z);
+
     // Adiciona na cena
     scene.add(animationPic);
 }

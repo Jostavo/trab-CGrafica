@@ -125,8 +125,20 @@ function update()
     animationPic.translateX( moveDistance );
   }
 
+  //barra de espaço, megaman atirando
+  if ( keyboard.down("space") || keyboard.pressed("space") ){
+    // Muda a animação pra PEWPEWPEWPEW -= <> <> <> <> <> <> <> position
+    if(animEsquerda == true){
+      changeAnim(pewpewMegamanAnim, pewpewMegaman, standingClock);
+      changeSide();
+    }
+    changeAnim2(pewpewMegamanAnim, pewpewMegaman, standingClock);
+    // Volta a textura caso ela esteja para a esquerda
+
+  }
+
   // Quando o usuário solta a tecla de andar, a animação volta para a Standing MegaMan
-  if( keyboard.up("A") || keyboard.up("D") ) {
+  if( keyboard.up("A") || keyboard.up("D")) {
     changeAnim(standMegamanAnim, standMegaman, standingClock);
     if( keyboard.up("A")){
       if(animEsquerda == false){
