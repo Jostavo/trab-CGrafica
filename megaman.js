@@ -55,11 +55,11 @@ function init() {
 
 
     // É criado o material para ser aplicado no Mesh (objeto)
-    backgroundMaterial = new THREE.MeshPhongMaterial( { color: 0x000088} );//ele nao caeita outra corrr
+    backgroundMaterial = new THREE.MeshBasicMaterial( { map: backgroundTexture, side: THREE.DoubleSide, transparent: true } );//ele nao caeita outra corrr
     foregroundMaterial = new THREE.MeshBasicMaterial( { map: foregroundTexture, side: THREE.DoubleSide, transparent: true } );
 
     // São criados os planes que receberão as imagens de fundo/frente/megaman
-    backgroundPlane = new THREE.CubeGeometry( 4693,460,1 );//não vai dar
+    backgroundPlane = new THREE.PlaneGeometry( 4693,460,1, 1 );//não vai dar
     foregroundPlane = new THREE.PlaneGeometry( 7680,460,1,1 );
 
     // Aqui é feito o Mesh (mistura) do plano com a imagem
@@ -80,7 +80,7 @@ function init() {
     scene.add(background);
     scene.add(foreground);
     scene.add(animationPic);
-    scene.add(bola);
+    //scene.add(bola);
     // renderer.setClearColor( new THREE.Color(0xffffff), 1);
 
     // Comando pra renderizar a cena
@@ -90,11 +90,11 @@ function init() {
 function addLights()
 {
   var lightbulb = new THREE.Mesh(
-		new THREE.SphereGeometry( 10, 16, 8 ),
+		new THREE.SphereGeometry( 5, 16, 8 ),
 		new THREE.MeshBasicMaterial( { color: 0xffaa00 } )
 	);
 	scene.add( lightbulb );
-	lightbulb.position.set(-3700, 130, 50)
+	lightbulb.position.set(-3715, 135, 50)
 
 }
 function animate()
