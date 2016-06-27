@@ -10,6 +10,7 @@ var background, foreground;
 var backgroundTexture, foregroundTexture;
 var backgroundPlane, foregroundPlane;
 var backgroundMaterial, foregroundMaterial;
+var bolaGeom, darkmat, bola;
 
 // var keyboard = new THREE.KeyboardState();
 var clock = new THREE.Clock();
@@ -27,6 +28,10 @@ function init() {
     // Aqui é feito o fetch de todas as imagens necessárias para o programa
     backgroundTexture = new THREE.ImageUtils.loadTexture('sprites/background/novobg.png');
     foregroundTexture = new THREE.ImageUtils.loadTexture('sprites/background/foreground.png');
+    //materia do mal
+    darkmat = new THREE.MeshLambertMaterial( { color: 0x000088 } );
+    //tipo de bola
+    bolaGeom = new THREE.SphereGeometry( 10, 16, 8 );
 
     // Criação do renderer da cena
     renderer = new THREE.WebGLRenderer();
@@ -45,22 +50,29 @@ function init() {
     camera.position.set(-3730, 130, 100);
     camera.lookAt(-3730, 130, 100);
 
+    //ADICIONA LUZESSSS
+    addLights();
+
+
     // É criado o material para ser aplicado no Mesh (objeto)
-    backgroundMaterial = new THREE.MeshBasicMaterial( { map: backgroundTexture, side: THREE.DoubleSide, transparent: true } );
+    backgroundMaterial = new THREE.MeshPhongMaterial( { color: 0x000088} );//ele nao caeita outra corrr
     foregroundMaterial = new THREE.MeshBasicMaterial( { map: foregroundTexture, side: THREE.DoubleSide, transparent: true } );
 
     // São criados os planes que receberão as imagens de fundo/frente/megaman
-    backgroundPlane = new THREE.PlaneGeometry( 4693,460,1,1 );
+    backgroundPlane = new THREE.CubeGeometry( 4693,460,1 );//não vai dar
     foregroundPlane = new THREE.PlaneGeometry( 7680,460,1,1 );
 
     // Aqui é feito o Mesh (mistura) do plano com a imagem
     background = new THREE.Mesh(backgroundPlane, backgroundMaterial);
     foreground = new THREE.Mesh(foregroundPlane, foregroundMaterial);
 
+    bola = new THREE.Mesh( bolaGeom.clone(), darkmat);
+    bola.position.set(-3730, 119, 30);
     // Aqui é definida as posições das imagens, definida a animação atual, a posição inicial do megaman
     background.position.set(-550,0,0);
     background.scale.set(1.5,1,1);
     foreground.position.set(0,0,20);
+
 
     initAnim(-3730, 119, 30);
 
@@ -68,13 +80,23 @@ function init() {
     scene.add(background);
     scene.add(foreground);
     scene.add(animationPic);
-
+    scene.add(bola);
     // renderer.setClearColor( new THREE.Color(0xffffff), 1);
 
     // Comando pra renderizar a cena
     renderer.render(scene, camera);
 }
 
+function addLights()
+{
+  var lightbulb = new THREE.Mesh(
+		new THREE.SphereGeometry( 10, 16, 8 ),
+		new THREE.MeshBasicMaterial( { color: 0xffaa00 } )
+	);
+	scene.add( lightbulb );
+	lightbulb.position.set(-3700, 130, 50)
+
+}
 function animate()
 {
     requestAnimationFrame( animate );
