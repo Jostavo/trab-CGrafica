@@ -10,8 +10,6 @@ var background, foreground;
 var backgroundTexture, foregroundTexture;
 var backgroundPlane, foregroundPlane;
 var backgroundMaterial, foregroundMaterial;
-var bolaGeom, darkmat, bola;
-
 // var keyboard = new THREE.KeyboardState();
 var clock = new THREE.Clock();
 
@@ -52,7 +50,7 @@ function init() {
 
     // É criado o material para ser aplicado no Mesh (objeto)
     backgroundMaterial = new THREE.MeshBasicMaterial( { map: backgroundTexture, side: THREE.DoubleSide, transparent: true } );//ele nao caeita outra corrr
-    foregroundMaterial = new THREE.MeshLambertMaterial( { map: foregroundTexture,transparent: true } );
+    foregroundMaterial = new THREE.MeshBasicMaterial( { map: foregroundTexture,transparent: true } );
 
     // São criados os planes que receberão as imagens de fundo/frente/megaman
     backgroundPlane = new THREE.PlaneGeometry( 4693,460,1, 1 );//não vai dar
@@ -134,7 +132,7 @@ function update()
 
     // Verifica se o Megaman já voltou para a posição central, assim volta a mexer a câmera
     if( !(animationPic.position.x < camera.position.x) )
-      camera.translateX(  moveDistance );
+      camera.translateX( moveDistance );
     animationPic.translateX( moveDistance );
   }
 
@@ -146,7 +144,8 @@ function update()
       changeSide();
     }
     changeAnim2(pewpewMegamanAnim, pewpewMegaman, standingClock);
-    // Volta a textura caso ela esteja para a esquerda
+    //adiciona projetil
+    shotSpawn();
 
   }
 
@@ -158,5 +157,13 @@ function update()
         changeSide();
       }
     }
+  }
+  else if(keyboard.up("space"))
+  {
+    if(animEsquerda == true){
+      changeAnim(standMegamanAnim, standMegaman, standingClock);
+      changeSide();
+    }
+    changeAnim2(standMegamanAnim, standMegaman, standingClock);
   }
 }

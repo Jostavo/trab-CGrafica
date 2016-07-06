@@ -33,28 +33,31 @@ function initAnim(x, y, z)
 		shotPoppingAnim = new TextureAnimator(shotPoppingTexture, 1, 3, 3, 30);
 
     // Aqui cria-se os Meshes
-    standMegamanMaterial = new THREE.MeshLambertMaterial( { map: standMegamanTexture, side: THREE.DoubleSide, transparent: true} );
-    walkMegamanMaterial = new THREE.MeshLambertMaterial( { map: walkMegamanTexture, side: THREE.DoubleSide, transparent: true} );
+    standMegamanMaterial = new THREE.MeshBasicMaterial( { map: standMegamanTexture, side: THREE.DoubleSide, transparent: true} );
+    walkMegamanMaterial = new THREE.MeshBasicMaterial( { map: walkMegamanTexture, side: THREE.DoubleSide, transparent: true} );
 		//novos Meshes
-		pewpewMegamanMaterial = new THREE.MeshLambertMaterial( { map: pewpewMegamanTexture, side: THREE.DoubleSide, transparent: true} );
-		shotMaterial = new THREE.MeshLambertMaterial( { map: shotTexture, side: THREE.DoubleSide, transparent: true} );
-		shotPoppingMaterial = new THREE.MeshLambertMaterial( { map: shotPoppingMaterial, side: THREE.DoubleSide, transparent: true} );
+		pewpewMegamanMaterial = new THREE.MeshBasicMaterial( { map: pewpewMegamanTexture, side: THREE.DoubleSide, transparent: true} );
+		shotMaterial = new THREE.MeshBasicMaterial( { map: shotTexture, side: THREE.DoubleSide, transparent: true} );
+		shotPoppingMaterial = new THREE.MeshBasicMaterial( { map: shotPoppingMaterial, side: THREE.DoubleSide, transparent: true} );
 
 
     // E o plano
     megamanPlane = new THREE.PlaneGeometry( 600,679 );
+		shotPlane = new THREE.PlaneGeometry(300,270);
 
     // Aqui mescla-se os planos com os materiais
     standMegaman = new THREE.Mesh(megamanPlane, standMegamanMaterial);
     walkMegaman = new THREE.Mesh(megamanPlane, walkMegamanMaterial);
 		pewpewMegaman = new THREE.Mesh(megamanPlane, pewpewMegamanMaterial);
-		shot = new THREE.Mesh(megamanPlane, shotMaterial);
-		shotPopping = new THREE.Mesh(megamanPlane, shotPoppingMaterial);
+		shot = new THREE.Mesh(shotPlane, shotMaterial);
+		shotPopping = new THREE.Mesh(shotPlane, shotPoppingMaterial);
 
     // Aqui inicializa-se as variáveis
     standMegaman.scale.set(0.035,0.035,0.035);
     walkMegaman.scale.set(0.035,0.035,0.035);
 		pewpewMegaman.scale.set(0.035,0.035,0.035);
+		shot.scale.set(0.035,0.035,0.035);
+		shotPopping.scale.set(0.035,0.035,0.035);
 
 		animationPic = standMegaman;
     animation = standMegamanAnim;
@@ -124,6 +127,17 @@ function changeSide()
 		animEsquerda = true;
   	animationPic.scale.x *= -1;
 	}
+}
+
+function shotSpawn()
+{
+	if(animEsquerda == true){
+			shot.position.set(megaman.x - 15, megaman.y+1.6, megaman.z);
+	}
+	else{
+			shot.position.set(megaman.x + 15, megaman.y+1.6, megaman.z)
+	}
+	scene.add(shot);
 }
 
 // Função de animação
