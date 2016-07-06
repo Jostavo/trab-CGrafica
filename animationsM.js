@@ -33,12 +33,12 @@ function initAnim(x, y, z)
 		shotPoppingAnim = new TextureAnimator(shotPoppingTexture, 1, 3, 3, 30);
 
     // Aqui cria-se os Meshes
-    standMegamanMaterial = new THREE.MeshBasicMaterial( { map: standMegamanTexture, side: THREE.DoubleSide, transparent: true} );
-    walkMegamanMaterial = new THREE.MeshBasicMaterial( { map: walkMegamanTexture, side: THREE.DoubleSide, transparent: true} );
+    standMegamanMaterial = new THREE.MeshLambertMaterial( { map: standMegamanTexture, side: THREE.DoubleSide, transparent: true} );
+    walkMegamanMaterial = new THREE.MeshLambertMaterial( { map: walkMegamanTexture, side: THREE.DoubleSide, transparent: true} );
 		//novos Meshes
-		pewpewMegamanMaterial = new THREE.MeshBasicMaterial( { map: pewpewMegamanTexture, side: THREE.DoubleSide, transparent: true} );
-		shotMaterial = new THREE.MeshBasicMaterial( { map: shotTexture, side: THREE.DoubleSide, transparent: true} );
-		shotPoppingMaterial = new THREE.MeshBasicMaterial( { map: shotPoppingMaterial, side: THREE.DoubleSide, transparent: true} );
+		pewpewMegamanMaterial = new THREE.MeshLambertMaterial( { map: pewpewMegamanTexture, side: THREE.DoubleSide, transparent: true} );
+		shotMaterial = new THREE.MeshLambertMaterial( { map: shotTexture, side: THREE.DoubleSide, transparent: true} );
+		shotPoppingMaterial = new THREE.MeshLambertMaterial( { map: shotPoppingMaterial, side: THREE.DoubleSide, transparent: true} );
 
 
     // E o plano
