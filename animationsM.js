@@ -1,6 +1,6 @@
 var megaman = {x: 0, y: 0, z: 0, hp: 16};
 var megamanPlane;
-var standMegaman, walkMegaman, jumpMegaman, dashMegaman, pewpewMegaman, shot, shotPopping;
+var standMegaman, walkMegaman, jumpMegaman, dashMegaman, pewpewMegaman;
 var standMegamanTexture, walkMegamanTexture, jumpMegamanTexture, dashMegamanTexture, pewpewMegamanTexture, shotTexture, shotPoppingTexture;
 var standMegamanMaterial, walkMegamanMaterial, jumpMegamanMaterial, dashMegamanMaterial, pewpewMegamanMaterial, shotMaterial, shotPoppingMaterial;
 var standMegamanAnim, walkMegamanAnim, jumpMegamanAnim, dashMegamanAnim, pewpewMegamanAnim, shotAnim, shotPoppingAnim;
@@ -49,15 +49,13 @@ function initAnim(x, y, z)
     standMegaman = new THREE.Mesh(megamanPlane, standMegamanMaterial);
     walkMegaman = new THREE.Mesh(megamanPlane, walkMegamanMaterial);
 		pewpewMegaman = new THREE.Mesh(megamanPlane, pewpewMegamanMaterial);
-		shot = new THREE.Mesh(shotPlane, shotMaterial);
-		shotPopping = new THREE.Mesh(shotPlane, shotPoppingMaterial);
+
 
     // Aqui inicializa-se as variáveis
     standMegaman.scale.set(0.035,0.035,0.035);
     walkMegaman.scale.set(0.035,0.035,0.035);
 		pewpewMegaman.scale.set(0.035,0.035,0.035);
-		shot.scale.set(0.035,0.035,0.035);
-		shotPopping.scale.set(0.035,0.035,0.035);
+		//shotPopping.scale.set(0.035,0.035,0.035);
 
 		animationPic = standMegaman;
     animation = standMegamanAnim;
@@ -131,12 +129,15 @@ function changeSide()
 
 function shotSpawn()
 {
+	var shot = new THREE.Mesh(shotPlane, shotMaterial);
+	shot.scale.set(0.035,0.035,0.035);
 	if(animEsquerda == true){
 			shot.position.set(megaman.x - 15, megaman.y+1.6, megaman.z);
 	}
 	else{
 			shot.position.set(megaman.x + 15, megaman.y+1.6, megaman.z)
 	}
+	shots.push(shot);
 	scene.add(shot);
 }
 
