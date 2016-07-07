@@ -101,6 +101,8 @@ function update()
   keyboard.update(); // Aqui recebe as atualizações do teclado
   animation.update(updateClock); // Aqui acontecem os updates das animações
 
+  //anima projéteis (se existirem)
+  animaShots();
   // Salva a posição do megaman no dado momento
   megaman.x = animationPic.position.x;
   megaman.y = animationPic.position.y;
@@ -146,7 +148,6 @@ function update()
     changeAnim2(pewpewMegamanAnim, pewpewMegaman, standingClock);
     //adiciona projetil
     shotSpawn();
-
   }
 
   // Quando o usuário solta a tecla de andar, a animação volta para a Standing MegaMan

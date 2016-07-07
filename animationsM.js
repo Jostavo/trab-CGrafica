@@ -1,3 +1,5 @@
+var TIROSPD = 5;
+
 var megaman = {x: 0, y: 0, z: 0, hp: 16};
 var megamanPlane;
 var standMegaman, walkMegaman, jumpMegaman, dashMegaman, pewpewMegaman;
@@ -6,7 +8,7 @@ var standMegamanMaterial, walkMegamanMaterial, jumpMegamanMaterial, dashMegamanM
 var standMegamanAnim, walkMegamanAnim, jumpMegamanAnim, dashMegamanAnim, pewpewMegamanAnim, shotAnim, shotPoppingAnim;
 
 var animEsquerda = false;
-var standingClock = 30, runningClock = 450;
+var standingClock = 3, runningClock = 5;
 
 function initAnim(x, y, z)
 {
@@ -137,8 +139,36 @@ function shotSpawn()
 	else{
 			shot.position.set(megaman.x + 15, megaman.y+1.6, megaman.z)
 	}
+	//multiplos tiros
 	shots.push(shot);
 	scene.add(shot);
+}
+
+//itera de trás pra frente, pra poder remover tiro mais antigo
+function animaShots()
+{
+	for(var i = shots.length-1; i>=0; i--)
+	{
+		var shotTemp = shots[i];
+		var posX = shotTemp.position.x;
+
+		//colisão com a parece esquerda
+		if (posX < -3780){
+			//remove do vetor o projetil que colidiu
+			//inserir anim de shot pop
+			shots.splice(i,1);//posição, numero de elementos a remover
+			scene.remove(shotTemp);
+		}
+		else {//se nao colidiu, anima
+			if (posX < animationPic.position.x) {//tiro a esquerda
+				shotTemp.translateX( -TIROSPD)
+			}
+			else {
+				shotTemp.translateX(TIROSPD)
+			}
+		}
+
+	}
 }
 
 // Função de animação
