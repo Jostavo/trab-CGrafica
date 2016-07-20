@@ -3,17 +3,19 @@ var TIROSPD = 5;//velocidade de movimento de projétil
 var megaman = {x: 0, y: 0, z: 0, hp: 16};//controle do personagem
 var megamanPlane;//geometria do personagem
 //objetos finais animados
-var standMegaman, walkMegaman, jumpMegaman, dashMegaman, pewpewMegaman;
+var standMegaman, walkMegaman, jumpMegaman, dashMegaman, pewpewMegaman, pewRunMegaman;
 //objetos intermediários de textura
-var standMegamanTexture, walkMegamanTexture, jumpMegamanTexture, dashMegamanTexture, pewpewMegamanTexture, shotTexture, shotPoppingTexture;
+var standMegamanTexture, walkMegamanTexture, jumpMegamanTexture, dashMegamanTexture, pewpewMegamanTexture, shotTexture, shotPoppingTexture, pewRunMegamanTexture;
 //objetos intermediários de material
-var standMegamanMaterial, walkMegamanMaterial, jumpMegamanMaterial, dashMegamanMaterial, pewpewMegamanMaterial, shotMaterial, shotPoppingMaterial;
+var standMegamanMaterial, walkMegamanMaterial, jumpMegamanMaterial, dashMegamanMaterial, pewpewMegamanMaterial, shotMaterial, shotPoppingMaterial, pewRunMegamanMaterial;
 //objetos intermediários de animação de textura
-var standMegamanAnim, walkMegamanAnim, jumpMegamanAnim, dashMegamanAnim, pewpewMegamanAnim, shotAnim, shotPoppingAnim;
+var standMegamanAnim, walkMegamanAnim, jumpMegamanAnim, dashMegamanAnim, pewpewMegamanAnim, shotAnim, shotPoppingAnim, pewRunMegamanAnim;
 //-------------------OBJETOS GLOBAIS DE ANIMAÇÃO----------------------
 
 
 //-------------------OBJETOS GLOBAIS DE CONTROLE DE ANIMAÇÃO----------------------
+var shooting = false;
+var running = false;
 var animEsquerda = false;//flag para espelhamento de animação
 var standingClock = 3, runningClock = 5;//temporizadores de atualização p/ 'parado' e 'correndo'
 //-------------------OBJETOS GLOBAIS DE CONTROLE DE ANIMAÇÃO----------------------
@@ -31,6 +33,8 @@ function initAnim(x, y, z)//FUNÇÃO DE CONTROLE DE ANIMAÇÃO
 		shotTexture.minFilter = THREE.LinearFilter;//impede redimensionamento automático de imagem.
 		shotPoppingTexture = THREE.ImageUtils.loadTexture('sprites/mmx/shot_pop.png');//text. de colisão projétil
 		shotPoppingTexture.minFilter = THREE.LinearFilter;//impede redimensionamento automático de imagem.
+		pewRunMegamanTexture = new THREE.ImageUtils.loadTexture('sprites/mmx/prMmx.png');//text. 'atirando e correndo'
+		pewRunMegamanTexture.minFilter = THREE.LinearFilter;//impede redimensionamento automático de imagem.
 		//------------------------CONTROLE DE TEXTURA-------------------------------
 
 		//-------------------CONTROLE DE ANIMAÇÃO DE TEXTURA-------------------------
@@ -43,6 +47,7 @@ function initAnim(x, y, z)//FUNÇÃO DE CONTROLE DE ANIMAÇÃO
 		pewpewMegamanAnim = new TextureAnimator(pewpewMegamanTexture, 1, 1, 1, 30);//'atirando'
 		shotAnim = new TextureAnimator(shotTexture, 1, 1, 1, 30);//'projétil'
 		shotPoppingAnim = new TextureAnimator(shotPoppingTexture, 1, 3, 3, 30);//'colisão de projétil'
+		pewRunMegamanAnim = new TextureAnimator(pewRunMegamanTexture, 1, 11, 11, 30);//'atirando e correndo'
 		//-------------------CONTROLE DE ANIMAÇÃO DE TEXTURA------------------------
 
 		//-------------------MATERIAL DE ANIMAÇÃO DE TEXTURA------------------------
@@ -60,6 +65,8 @@ function initAnim(x, y, z)//FUNÇÃO DE CONTROLE DE ANIMAÇÃO
 			map: shotTexture, side: THREE.DoubleSide, transparent: true} );
 		shotPoppingMaterial = new THREE.MeshBasicMaterial({ //colisão do projétil
 			map: shotPoppingTexture, side: THREE.DoubleSide, transparent: true} );
+		pewpewMegamanMaterial = new THREE.MeshBasicMaterial({ //megaman 'atirando e correndo'
+			map: pewRunMegamanTexture, side: THREE.DoubleSide, transparent: true} );
 		//-------------------MATERIAL DE ANIMAÇÃO DE TEXTURA------------------------
 
     //-------------------GEOMETRIA DA ANIMAÇÃO---------------------------
@@ -73,6 +80,7 @@ function initAnim(x, y, z)//FUNÇÃO DE CONTROLE DE ANIMAÇÃO
 		standMegaman = new THREE.Mesh(megamanPlane, standMegamanMaterial);
     walkMegaman = new THREE.Mesh(megamanPlane, walkMegamanMaterial);
 		pewpewMegaman = new THREE.Mesh(megamanPlane, pewpewMegamanMaterial);
+		pewRunMegaman = new THREE.Mesh(megamanPlane, pewRunMegamanMaterial);
 		//VERIFICAR se faltou mesh do tiro
 		//-------------------FUSÃO DE ANIMAÇÃO DE TEXTURA---------------------------
 
@@ -80,6 +88,7 @@ function initAnim(x, y, z)//FUNÇÃO DE CONTROLE DE ANIMAÇÃO
     standMegaman.scale.set(0.6,0.6,0.6);
     walkMegaman.scale.set(0.6,0.6,0.6);
 		pewpewMegaman.scale.set(0.6,0.6,0.6);
+		pewRunMegaman.scale.set(0.6,0.6,0.6);
 		//shotPopping.scale.set(0.035,0.035,0.035);
 		//-------------------ESCALA DE TAMANHO DE ANIMAÇÃO--------------------------
 

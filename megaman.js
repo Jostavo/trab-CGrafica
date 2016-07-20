@@ -153,8 +153,13 @@ function update()//ITERAÇÕES DO LOOP
   //-------------------CAPTURA DE EVENTOS DO TECLADO----------------------
   // >>>TECLA "A" pressionada<<<
   if ( keyboard.down("A") || keyboard.pressed("A") ){
+    running = true;
     // \/ Troca de animação 'parado' para 'andando' \/
-    changeAnim(walkMegamanAnim, walkMegaman, runningClock);
+    if(shooting == true){
+      changeAnim(pewRunMegamanAnim, pewRunMegaman, runningClock);
+    }else{
+      changeAnim(walkMegamanAnim, walkMegaman, runningClock);
+    }
     // Caso a textura não esteja virada para a esquerda, vira
     if(animEsquerda == false){//flag de controle para qual lado está a animação
       changeSide();//função que vira a animação
@@ -170,8 +175,13 @@ function update()//ITERAÇÕES DO LOOP
   }
   // >>>TECLA "D" pressionada<<<
   if ( keyboard.down("D") || keyboard.pressed("D") ){
+    running = true;
     // \/ Troca de animação 'parado' para 'andando' \/
-    changeAnim(walkMegamanAnim, walkMegaman, runningClock);
+    if(shooting == true){
+      changeAnim(pewRunMegamanAnim, pewRunMegaman, runningClock);
+    }else{
+      changeAnim(walkMegamanAnim, walkMegaman, runningClock);
+    }
     // Caso a textura não esteja virada para a esquerda, vira
     if(animEsquerda == true){//flag de controle ao contrário da tecla "A"
       changeSide();//função que vira a animação
@@ -186,6 +196,8 @@ function update()//ITERAÇÕES DO LOOP
   // >>>TECLA "ESPAÇO" pressionada<<<
   if ( keyboard.down("space")){
     // \/ Função que muda a animação pra posição de PEWPEWPEWPEW -= <> <> <> <> <> <> <>
+    shooting = true;
+
     if(animEsquerda == true){//flag de espelhamento da animação
       changeAnim(pewpewMegamanAnim, pewpewMegaman, standingClock);
       changeSide();
@@ -199,6 +211,7 @@ function update()//ITERAÇÕES DO LOOP
   // >>>TECLA "A", "D" ou "ESPAÇO" soltas<<<
   //Animação volta para o Megaman 'parado'
   if( keyboard.up("A") || keyboard.up("D")) {
+    running = false;
     //qualquer uma das duas animações volta para 'parado'
     changeAnim(standMegamanAnim, standMegaman, standingClock);
     if( keyboard.up("A")){//a flag controle o 'lado' qual a animação antigo estava
@@ -210,12 +223,13 @@ function update()//ITERAÇÕES DO LOOP
   // >>>TECLA "ESPAÇO" solta<<<
   else if(keyboard.up("space"))
   {
+    shooting = false;
+
+    changeAnim(standMegamanAnim, standMegaman, standingClock);
+
     if(animEsquerda == true){//flag de controle do lado da animação
-      changeAnim(standMegamanAnim, standMegaman, standingClock);
-      changeSide();//WOLOLOOOO 
+      changeSide();//WOLOLOOOO
     }
-    // \/função de troca de animação auxiliar, pois ela não vira espelha a imagem internamente.
-    changeAnim2(standMegamanAnim, standMegaman, standingClock);
   }
   //-------------------CAPTURA DE EVENTOS DO TECLADO----------------------
 }
