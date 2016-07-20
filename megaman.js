@@ -225,7 +225,11 @@ function update()//ITERAÇÕES DO LOOP
   {
     shooting = false;
 
-    changeAnim(standMegamanAnim, standMegaman, standingClock);
+    if(running == true){
+      changeAnim(walkMegamanAnim, walkMegaman, runningClock);
+    }else{
+      changeAnim(standMegamanAnim, standMegaman, standingClock);
+    }
 
     if(animEsquerda == true){//flag de controle do lado da animação
       changeSide();//WOLOLOOOO
