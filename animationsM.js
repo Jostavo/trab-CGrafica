@@ -77,9 +77,9 @@ function initAnim(x, y, z)//FUNÇÃO DE CONTROLE DE ANIMAÇÃO
 		//-------------------FUSÃO DE ANIMAÇÃO DE TEXTURA---------------------------
 
 		//-------------------ESCALA DE TAMANHO DE ANIMAÇÃO--------------------------
-    standMegaman.scale.set(0.035,0.035,0.035);
-    walkMegaman.scale.set(0.035,0.035,0.035);
-		pewpewMegaman.scale.set(0.035,0.035,0.035);
+    // standMegaman.scale.set(0.035,0.035,0.035);
+    // walkMegaman.scale.set(0.035,0.035,0.035);
+		// pewpewMegaman.scale.set(0.035,0.035,0.035);
 		//shotPopping.scale.set(0.035,0.035,0.035);
 		//-------------------ESCALA DE TAMANHO DE ANIMAÇÃO--------------------------
 
