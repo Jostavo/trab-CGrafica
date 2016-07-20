@@ -1,170 +1,221 @@
-var mobs = [];
-var shots = [];
+//-------------------VETORES DE CONTROLE DE OBJETOS----------------------
+var mobs = []; //VETOR PARA ALOCAÇÃO DE TODOS OS MONSTROS ATIVOS NA CENA
+var shots = []; //VETOR PARA ALOCAÇÃO DE TODOS PROJÉTEIS DISPARADOS NA CENA
+//-------------------VETORES DE CONTROLE DE OBJETOS----------------------
 
-var scene, camera, renderer, keyboard;
+//-------------------VARIÁVEIS DE ANIMAÇÃO----------------------
+var scene, camera, renderer, keyboard; //keyboard recebe os eventos do teclado
+//-------------------VARIÁVEIS DE ANIMAÇÃO----------------------
 
-var animation, animationPic;
-var updateClock;
+//-------------------ANIMAÇÃO----------------------
+var animation; //VARIÁVEL COM ANIMAÇÃO COMPLETA
+var animationPic; //VARIÁVEL COM AS IMAGENS DE ANIMAÇÃO
+var updateClock; //TIMER PARA ATUALIZAR A ANIMAÇÃO
+//-------------------ANIMAÇÃO----------------------
 
+//-------------------ELEMENTOS DE CENA----------------------
 var background, foreground;
 var backgroundTexture, foregroundTexture;
 var backgroundPlane, foregroundPlane;
 var backgroundMaterial, foregroundMaterial;
-// var keyboard = new THREE.KeyboardState();
-var clock = new THREE.Clock();
+//-------------------ELEMENTOS DE CENA----------------------
 
-keyboard = new KeyboardState();
-init();
-animate();
+//-------------------OBJETOS GLOBAIS----------------------
+var clock = new THREE.Clock(); //Tick tock, você criou o clock
+keyboard = new KeyboardState(); //atribuição de listener do teclado
+//-------------------OBJETOS GLOBAIS----------------------
 
-function init() {
-  var ScreenWidth = 800, ScreenHeight = 600;
-  var viewAngle = 90;
-  var near = 0.1;
-  var far = 2000;
+init();//função de inicialização das variáveis da cena inicial
+animate();//rotina principal do jogo
 
-    // Aqui é feito o fetch de todas as imagens necessárias para o programa
-    backgroundTexture = new THREE.ImageUtils.loadTexture('sprites/background/novobg.png');
-    foregroundTexture = new THREE.ImageUtils.loadTexture('sprites/background/foreground.png');
+function init() {//PEGUE SUA TOALHA QUE A JORNADA VAI COMEÇAR
+  var ScreenWidth = 800, ScreenHeight = 600;//tamanho da câmera do jogo largura x altura
+  var viewAngle = 90;//ângulo de visualização
+  var near = 0.1; //distancia da câmera perto
+  var far = 2000; //valor
 
-    // Criação do renderer da cena
+    //-------------------PLANOS DE FUNDO----------------------
+    //Carregando imagens de plano de fundo da cena
+    backgroundTexture = new THREE.ImageUtils.loadTexture('sprites/background/novobg.png');//mais ao fundo da cena
+    foregroundTexture = new THREE.ImageUtils.loadTexture('sprites/background/foreground.png');//mais próximo da camera
+    //-------------------PLANOS DE FUNDO----------------------
+
+    //-------------------RENDERER----------------------
+    //Carregando e setando o renderizador da cena
     renderer = new THREE.WebGLRenderer();
     renderer.setSize(ScreenWidth, ScreenHeight);
+    //-------------------RENDERER----------------------
 
-    // Aqui a gente procura o div ThreeJS e encaixa o game no Web
-    container = document.getElementById('ThreeJS');
-	  container.appendChild( renderer.domElement );
+    //-------------------CONTAINER HTML----------------------
+    // Aqui a gente procura o <div id = ThreeJS> e encaixa o game no Web
+    container = document.getElementById('ThreeJS');//captura qual <div> tem o id 'ThreeJS'
+	  container.appendChild( renderer.domElement );//insere o renderizador dentro do div, na hierarquia do DOM
+    //-------------------CONTAINER HTML----------------------
 
-    // É criado a Cena
-    scene = new THREE.Scene();
+    //-------------------ELEMENTOS DE CENA----------------------
+    scene = new THREE.Scene(); //criação do objeto cena
+    //-------------------ELEMENTOS DE CENA----------------------
 
-    // Aqui a gente cria a câmera, define os parâmetros e para aonde ela vai apontar/olhar
+    //-------------------CÂMERA----------------------
+    // \/ criação da câmera, params(ângulo de visão, aspecto, proximo, distante)
     camera = new THREE.PerspectiveCamera(viewAngle, ScreenWidth/ScreenHeight, near, far);
-    scene.add(camera);
-    camera.position.set(-3730, 130, 100);
-    camera.lookAt(-3730, 130, 100);
+    scene.add(camera);//adiciona a câmera na cena
+    camera.position.set(-3730, 130, 100);//posição da câmera dentro da cena
+    camera.lookAt(-3730, 130, 100);//para onde a câmera está mirando
+    //VERIFICAR ^^^ chance de bug na sombra?
+    //-------------------CÂMERA----------------------
 
-    //ADICIONA LUZESSSS
-    addLights();
+    //função para ADICIONAR LUZESSSS
+    addLights();//afinal todo paladino precisa da Luz
 
+    //-------------------MATERIAL DOS PLANOS----------------------
+    // É criado o material para ser aplicado no Mesh(objeto)
+    backgroundMaterial = new THREE.MeshBasicMaterial(
+      { map: backgroundTexture, side: THREE.DoubleSide, transparent: true } );
+    foregroundMaterial = new THREE.MeshBasicMaterial(
+      { map: foregroundTexture,transparent: true } );
+    //-------------------MATERIAL DOS PLANOS----------------------
 
-    // É criado o material para ser aplicado no Mesh (objeto)
-    backgroundMaterial = new THREE.MeshBasicMaterial( { map: backgroundTexture, side: THREE.DoubleSide, transparent: true } );//ele nao caeita outra corrr
-    foregroundMaterial = new THREE.MeshBasicMaterial( { map: foregroundTexture,transparent: true } );
-
-    // São criados os planes que receberão as imagens de fundo/frente/megaman
+    //-------------------GEOMETRIA DOS PLANOS----------------------
+    // São criados os planos nos quais serão carregadas as imagens de fundo
     backgroundPlane = new THREE.PlaneGeometry( 4693,460,1, 1 );//não vai dar
     foregroundPlane = new THREE.PlaneGeometry( 7680,460,1,1 );
+    //-------------------GEOMETRIA DOS PLANOS----------------------
 
-    // Aqui é feito o Mesh do plano com a imagem
+    //-------------------FUSÃO DOS PLANOS----------------------
+    // Junta-se o material com a geometria para criar o PLANO FINAL (o plano final é passar em CG)
     background = new THREE.Mesh(backgroundPlane, backgroundMaterial);
     foreground = new THREE.Mesh(foregroundPlane, foregroundMaterial);
+    //-------------------FUSÃO DOS PLANOS----------------------
 
 
-    // Aqui é definida as posições das imagens, definida a animação atual, a posição inicial do megaman
+    //-------------------POSIÇÃO DOS PLANOS----------------------
+    //Ajustando a posição do back, quanto do fore na cena
     background.position.set(-550,0,0);
-    background.scale.set(1.5,1,1);
+    background.scale.set(1.5,1,1);//escala de imagem para melhor perspectiva
     foreground.position.set(0,0,20);
+    //-------------------POSIÇÃO DOS PLANOS----------------------
 
+    //-------------------FUNÇÃO DE CONTROLE DE ANIMAÇÃO----------------------
+    initAnim(-3730, 119, 30);//parametrô = xyz em que o megaman vai aparecer
+    //-------------------FUNÇÃO DE CONTROLE DE ANIMAÇÃO----------------------
 
-    initAnim(-3730, 119, 30);
-
-    // Os elementos são adicionados na cena
+    //-------------------ADIÇÃO DE COMPONENTES DA CENA----------------------
     scene.add(background);
     scene.add(foreground);
-    scene.add(animationPic);
-    renderer.setClearColor( new THREE.Color(0xffffff), 1);
+    scene.add(animationPic);//add a imagem de animação
+    //-------------------ADIÇÃO DE COMPONENTES DA CENA----------------------
 
+    //-------------------SETTING DO RENDERIZADOR----------------------
+    //\/ renderizador aceita o background c/ fundo transparente \/
+    renderer.setClearColor( new THREE.Color(0xffffff), 1);//params = cor, alpha (1 p/ transp.)
     // Comando pra renderizar a cena
     renderer.render(scene, camera);
+    //-------------------SETTING DO RENDERIZADOR----------------------
 }
 
-function addLights()
+function addLights()//funçao de adicionar luz na cena
 {
-  var light = new THREE.DirectionalLight(0xffffff);
-  light.position.set(-3730, 119, 30)
+  //-------------------LUZES----------------------
+  var light = new THREE.DirectionalLight(0xffffff);//Luz branca direcionada
+  light.position.set(-3730, 119, 30)//posição da luz
 	scene.add(light);
-
+  //VERIFICAR POSIÇÃO DA LUZ
+  //-------------------LUZES----------------------
 }
-function animate()
+function animate() //LOOP principal PADRÃO
 {
     requestAnimationFrame( animate );
 	  renderer.render(scene, camera);
 	  update();
 }
 
-function update()
+function update()//ITERAÇÕES DO LOOP
 {
-  var delta = clock.getDelta(); // Clock pra contagem da animação
-  var moveDistance = 50 * delta; // Distância de movimento
+  var delta = clock.getDelta(); // Clock pra atualização da animação
+  var moveDistance = 50 * delta; // Distância de movimento do megaman
 
-  keyboard.update(); // Aqui recebe as atualizações do teclado
-  animation.update(updateClock); // Aqui acontecem os updates das animações
+  //-------------------ATUALIZAÇÃO DE OBJETOS----------------------
+  keyboard.update(); // Atualiza listener do teclado
+  animation.update(updateClock); //Update das animações c/ tempo de clock
+  //-------------------ATUALIZAÇÃO DE OBJETOS----------------------
 
-  //anima projéteis (se existirem)
-  animaShots();
-  // Salva a posição do megaman no dado momento
-  megaman.x = animationPic.position.x;
+  //-------------------FUNÇÃO DE ANIMAÇÃO DE PROJÉTEIS----------------------
+  animaShots(); //anima projéteis (se existirem)
+  //-------------------FUNÇÃO DE ANIMAÇÃO DE PROJÉTEIS----------------------
+
+  //-------------------CAPTURA DE POSIÇÃO ATUAL----------------------
+  megaman.x = animationPic.position.x;//CAPTURA xyz do Megaman
   megaman.y = animationPic.position.y;
   megaman.z = animationPic.position.z;
+  //-------------------CAPTURA DE POSIÇÃO ATUAL----------------------
 
-  // De acordo com cada tecla, executa um código específico
+  //-------------------CAPTURA DE EVENTOS DO TECLADO----------------------
+  // >>>TECLA "A" pressionada<<<
   if ( keyboard.down("A") || keyboard.pressed("A") ){
-    // Muda pra animação Walking MegaMan
+    // \/ Troca de animação 'parado' para 'andando' \/
     changeAnim(walkMegamanAnim, walkMegaman, runningClock);
     // Caso a textura não esteja virada para a esquerda, vira
-    if(animEsquerda == false){
-      changeSide();
+    if(animEsquerda == false){//flag de controle para qual lado está a animação
+      changeSide();//função que vira a animação
     }
-
-    // Verifica colisão com a parede do lado esquerdo e controla a câmera (para a câmera não passar dos limites)
+    //-------------------COLISÃO----------------------
+    //Controla a câmera (para a câmera não passar dos limites)
     if(camera.position.x > -3730 && animationPic.position.x <= camera.position.x)
-      camera.translateX( -moveDistance );
-    if(animationPic.position.x > -3775)
-      animationPic.translateX( -moveDistance );
+      camera.translateX( -moveDistance );//decrementa a posição em x
+    //Verifica colisão do megaman com a parede do lado esquerdo
+    if(animationPic.position.x > -3775)//-3775 é o posX da parede
+      animationPic.translateX( -moveDistance );//decrementa para andar
+    //-------------------COLISÃO----------------------
   }
-
+  // >>>TECLA "D" pressionada<<<
   if ( keyboard.down("D") || keyboard.pressed("D") ){
-    // Muda a animação pra Walking MegaMan
+    // \/ Troca de animação 'parado' para 'andando' \/
     changeAnim(walkMegamanAnim, walkMegaman, runningClock);
-    // Volta a textura caso ela esteja para a esquerda
-    if(animEsquerda == true){
-      changeSide();
+    // Caso a textura não esteja virada para a esquerda, vira
+    if(animEsquerda == true){//flag de controle ao contrário da tecla "A"
+      changeSide();//função que vira a animação
     }
-
-    // Verifica se o Megaman já voltou para a posição central, assim volta a mexer a câmera
+    //-------------------CONTROLE DE CÂMERA----------------------
+    //se o megaman estiver fora do centro, espera ele centralizar
     if( !(animationPic.position.x < camera.position.x) )
-      camera.translateX( moveDistance );
-    animationPic.translateX( moveDistance );
+      camera.translateX( moveDistance );//move a camera junto se ele estiver ao centro
+    //-------------------CONTROLE DE CÂMERA----------------------
+    animationPic.translateX( moveDistance );//move o megaman
   }
-
-  //barra de espaço, megaman atirando
-  if ( keyboard.down("space") || keyboard.pressed("space") ){
-    // Muda a animação pra PEWPEWPEWPEW -= <> <> <> <> <> <> <> position
-    if(animEsquerda == true){
+  // >>>TECLA "ESPAÇO" pressionada<<<
+  if ( keyboard.down("space")){
+    // \/ Função que muda a animação pra posição de PEWPEWPEWPEW -= <> <> <> <> <> <> <>
+    if(animEsquerda == true){//flag de espelhamento da animação
       changeAnim(pewpewMegamanAnim, pewpewMegaman, standingClock);
       changeSide();
     }
+    // \/função de troca de animação auxiliar, pois ela não vira espelha a imagem internamente.
     changeAnim2(pewpewMegamanAnim, pewpewMegaman, standingClock);
-    //adiciona projetil
+    // função de adicionar projetil
     shotSpawn();
   }
 
-  // Quando o usuário solta a tecla de andar, a animação volta para a Standing MegaMan
+  // >>>TECLA "A", "D" ou "ESPAÇO" soltas<<<
+  //Animação volta para o Megaman 'parado'
   if( keyboard.up("A") || keyboard.up("D")) {
+    //qualquer uma das duas animações volta para 'parado'
     changeAnim(standMegamanAnim, standMegaman, standingClock);
-    if( keyboard.up("A")){
+    if( keyboard.up("A")){//a flag controle o 'lado' qual a animação antigo estava
       if(animEsquerda == false){
         changeSide();
       }
     }
   }
+  // >>>TECLA "ESPAÇO" solta<<<
   else if(keyboard.up("space"))
   {
-    if(animEsquerda == true){
+    if(animEsquerda == true){//flag de controle do lado da animação
       changeAnim(standMegamanAnim, standMegaman, standingClock);
-      changeSide();
+      changeSide();//WOLOLOOOO 
     }
+    // \/função de troca de animação auxiliar, pois ela não vira espelha a imagem internamente.
     changeAnim2(standMegamanAnim, standMegaman, standingClock);
   }
+  //-------------------CAPTURA DE EVENTOS DO TECLADO----------------------
 }
