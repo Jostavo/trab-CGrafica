@@ -63,7 +63,7 @@ function initAnim(x, y, z)//FUNÇÃO DE CONTROLE DE ANIMAÇÃO
 		//-------------------MATERIAL DE ANIMAÇÃO DE TEXTURA------------------------
 
     //-------------------GEOMETRIA DA ANIMAÇÃO---------------------------
-    megamanPlane = new THREE.PlaneGeometry( 600,679 );
+    megamanPlane = new THREE.PlaneGeometry( 39, 35 );
 		shotPlane = new THREE.PlaneGeometry(300,270);
 		//-------------------GEOMETRIA DA ANIMAÇÃO---------------------------
 
@@ -77,9 +77,9 @@ function initAnim(x, y, z)//FUNÇÃO DE CONTROLE DE ANIMAÇÃO
 		//-------------------FUSÃO DE ANIMAÇÃO DE TEXTURA---------------------------
 
 		//-------------------ESCALA DE TAMANHO DE ANIMAÇÃO--------------------------
-    // standMegaman.scale.set(0.035,0.035,0.035);
-    // walkMegaman.scale.set(0.035,0.035,0.035);
-		// pewpewMegaman.scale.set(0.035,0.035,0.035);
+    standMegaman.scale.set(0.6,0.6,0.6);
+    walkMegaman.scale.set(0.6,0.6,0.6);
+		pewpewMegaman.scale.set(0.6,0.6,0.6);
 		//shotPopping.scale.set(0.035,0.035,0.035);
 		//-------------------ESCALA DE TAMANHO DE ANIMAÇÃO--------------------------
 
