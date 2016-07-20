@@ -64,7 +64,7 @@ function initAnim(x, y, z)//FUNÇÃO DE CONTROLE DE ANIMAÇÃO
 
     //-------------------GEOMETRIA DA ANIMAÇÃO---------------------------
     megamanPlane = new THREE.PlaneGeometry( 39, 35 );
-		shotPlane = new THREE.PlaneGeometry(300,270);
+		shotPlane = new THREE.PlaneGeometry( 18, 15 );
 		//-------------------GEOMETRIA DA ANIMAÇÃO---------------------------
 
     //-------------------FUSÃO DE ANIMAÇÃO DE TEXTURA---------------------------
