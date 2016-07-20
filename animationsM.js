@@ -172,10 +172,10 @@ function shotSpawn(){ //FUNÇÃO para inserção de projéteis na cena
 	 para saber em que lado o tiro deverá aparecer.
 	 O projétil tem uma distância mínima do centro do objeto do Megaman*/
 	if(animEsquerda == true){//megaman apontado p/ esquerda
-			shot.position.set(megaman.x - 15, megaman.y+1, megaman.z);
+			shot.position.set(megaman.x - 15, megaman.y+0.85, megaman.z);
 	}
 	else{//megaman apontado p/ direita
-			shot.position.set(megaman.x + 15, megaman.y+1, megaman.z);
+			shot.position.set(megaman.x + 15, megaman.y+0.85, megaman.z);
 	}
 	//------------------CONTROLE DE OBJETO DE PROJÉTIL--------------------------
 	//------------------CONTROLE DE OBJETO DE CENA--------------------------
