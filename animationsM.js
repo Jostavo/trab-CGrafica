@@ -164,7 +164,7 @@ function changeSide(){ //FUNÇÃO de controle de espelhamento da animação
 function shotSpawn(){ //FUNÇÃO para inserção de projéteis na cena
 	//------------------CONTROLE DE OBJETO DE PROJÉTIL--------------------------
 	var shot = new THREE.Mesh(shotPlane, shotMaterial);//fusão de geometria + material
-	shot.scale.set(0.035,0.035,0.035);//escala do tamanho do objeto final de animação
+	shot.scale.set(0.6,0.6,0.6);//escala do tamanho do objeto final de animação
 	//------------------CONTROLE DE OBJETO DE PROJÉTIL--------------------------
 
 	//------------------CONTROLE DE POSIÇÃO DE PROJÉTIL--------------------------
