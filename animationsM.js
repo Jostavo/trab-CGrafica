@@ -120,9 +120,11 @@ function initAnim(x, y, z)//FUNÇÃO DE CONTROLE DE ANIMAÇÃO
 		//-------------------ESCALA DE TAMANHO DE ANIMAÇÃO--------------------------
 
 		//-------------------ATUALIZAÇÃO P/ OBJETOS INTERNOS------------------------
-		animationPic = standMegaman;//Animação completa (com geometria)
-    animation = standMegamanAnim;//Animação de textura
+		// animationPic = standMegaman;//Animação completa (com geometria)
+    // animation = standMegamanAnim;//Animação de textura
     updateClock = standingClock;//Temporizador de atualização
+		animationPic = standMisseler;
+		animation = standMisselerAnim;
 		//-------------------ATUALIZAÇÃO P/ OBJETOS INTERNOS------------------------
 
 		//-------------------CAPTURA PARÂMETROS --------------------------
@@ -182,7 +184,6 @@ function mobSpawn(position, value){
 			// mobsAnim.add(standMisselerAnim);
 			// scene.add(standMisseler);
 			// standMisselerClock = 0;
-			changeAnim(standMisselerAnim, standMisseler, standingClock);
 		}
 	}else if (value == 2){ //Spawna Flying bee
 
