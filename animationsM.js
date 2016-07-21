@@ -169,21 +169,21 @@ function mobSpawn(position, value){
 	var i;
 
 	if (value == 1){ //Spawna Misseler
-		for(i = 0; i < mobs.length; i++){
-			if(mobs[i].position.x == position){
-				auxiliar = true;
-			}
-		}
+		// for(i = 0; i < mobs.length; i++){
+		// 	if(mobs[i].position.x == position){
+		// 		auxiliar = true;
+		// 	}
+		// }
 
-		if(auxiliar != true){
-			changeSide();
+		// if(auxiliar != true){
+			// changeSide();
 			standMisseler.scale.x *= -1;
 			standMisseler.position.set(position, megaman.y, megaman.z);
 			mobs.push(standMisseler);
 			mobsAnim.push(standMisselerAnim);
 			scene.add(standMisseler);
 			standMisselerClock = 0;
-		}
+		// }
 	}else if (value == 2){ //Spawna Flying bee
 
 	}
