@@ -111,7 +111,7 @@ function changeAnim(novaAnim, novaImg, clockzin){//FUNÇÃO de troca de animaç�
 		//params = textura animada, obj final de animação, temporizador de animação
 		//-------------------TRATAMENTO DE ESPELHAMENTO--------------------------
 		//Quando a anim. está espelhada,volta a anim. ao normal antes de salvar
-		aux = animEsquerda;
+		var aux = animEsquerda;
 
     if(animEsquerda == true){
       changeSide();
