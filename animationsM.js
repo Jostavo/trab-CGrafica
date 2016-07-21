@@ -31,7 +31,7 @@ function initAnim(x, y, z)//FUNÇÃO DE CONTROLE DE ANIMAÇÃO
     pewpewMegamanTexture.minFilter = THREE.LinearFilter;//impede redimensionamento automático de imagem.
 		shotTexture = new THREE.ImageUtils.loadTexture('sprites/mmx/shot1.png');//text. do projétil
 		shotTexture.minFilter = THREE.LinearFilter;//impede redimensionamento automático de imagem.
-		shotPoppingTexture = THREE.ImageUtils.loadTexture('sprites/mmx/shot_pop.png');//text. de colisão projétil
+		shotPoppingTexture = new THREE.ImageUtils.loadTexture('sprites/mmx/shot_pop.png');//text. de colisão projétil
 		shotPoppingTexture.minFilter = THREE.LinearFilter;//impede redimensionamento automático de imagem.
 		pewRunMegamanTexture = new THREE.ImageUtils.loadTexture('sprites/mmx/prMmx.png');//text. 'atirando e correndo'
 		pewRunMegamanTexture.minFilter = THREE.LinearFilter;//impede redimensionamento automático de imagem.
@@ -65,7 +65,7 @@ function initAnim(x, y, z)//FUNÇÃO DE CONTROLE DE ANIMAÇÃO
 			map: shotTexture, side: THREE.DoubleSide, transparent: true} );
 		shotPoppingMaterial = new THREE.MeshBasicMaterial({ //colisão do projétil
 			map: shotPoppingTexture, side: THREE.DoubleSide, transparent: true} );
-		pewpewMegamanMaterial = new THREE.MeshBasicMaterial({ //megaman 'atirando e correndo'
+		pewRunMegamanMaterial = new THREE.MeshBasicMaterial({ //megaman 'atirando e correndo'
 			map: pewRunMegamanTexture, side: THREE.DoubleSide, transparent: true} );
 		//-------------------MATERIAL DE ANIMAÇÃO DE TEXTURA------------------------
 
