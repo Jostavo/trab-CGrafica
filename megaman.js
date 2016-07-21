@@ -155,7 +155,6 @@ function update()//ITERAÇÕES DO LOOP
   for(var i = 0; i < mobs.lenght; i++){
     mobsAnim[i].update(updateClock);
   }
-  // standMisselerAnim.update(updateClock);
   //-------------------ATUALIZAÇÃO DE OBJETOS----------------------
 
   //-------------------FUNÇÃO DE ANIMAÇÃO DE PROJÉTEIS----------------------
@@ -225,6 +224,10 @@ function update()//ITERAÇÕES DO LOOP
 
     if(camera.position.x > -3600){
       mobSpawn(-3500, 1);
+    }
+
+    if(camera.position.x > -3400){
+      mobSpawn(-3350, 2);
     }
 
     animationPic.translateX( moveDistance );//move o megaman

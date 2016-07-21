@@ -161,7 +161,7 @@ function changeSide(){ //FUNÇÃO de controle de espelhamento da animação
 }
 
 function animaMob(){
-	
+
 }
 
 function mobSpawn(position, value){
@@ -170,7 +170,8 @@ function mobSpawn(position, value){
 
 	if(value == 1){ //Spawna Misseler
 		for(i = 0; i < mobs.length; i++){
-			if(mobs[i].position.x == position){
+			// if(mobs[i].position.x == position){
+			if(mobs[i] == standMisseler){
 				auxiliar = true;
 			}
 		}
@@ -183,7 +184,19 @@ function mobSpawn(position, value){
 			standMisselerClock = 0;
 		}
 	}else if(value == 2){ //Spawna Flying bee
-
+		// for(i = 0; i < mobs.length; i++){
+		// 	if(mobs[i].position.x == position){
+		// 		auxiliar = true;
+		// 	}
+		// }
+		//
+		// if(auxiliar != true){
+		// 	standMisseler.position.set(position, megaman.y+5, megaman.z - 5);
+		// 	mobs.push(standMisseler);
+		// 	mobsAnim.push(standMisselerAnim);
+		// 	scene.add(standMisseler);
+		// 	standMisselerClock = 0;
+		// }
 	}
 }
 
