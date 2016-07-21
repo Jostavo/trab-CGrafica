@@ -146,6 +146,7 @@ function animate() //LOOP principal PADRÃO
 
 function update()//ITERAÇÕES DO LOOP
 {
+  var auxiliar;
   var delta = clock.getDelta(); // Clock pra atualização da animação
   var moveDistance = 50 * delta; // Distância de movimento do megaman
 
@@ -153,7 +154,8 @@ function update()//ITERAÇÕES DO LOOP
   keyboard.update(); // Atualiza listener do teclado
   animation.update(updateClock); //Update das animações c/ tempo de clock
   for(var i = 0; i < mobs.lenght; i++){
-    mobsAnim[i].update(updateClock);
+    auxiliar = mobsAnim[i];
+    auxiliar.update(updateClock);
   }
   //-------------------ATUALIZAÇÃO DE OBJETOS----------------------
 

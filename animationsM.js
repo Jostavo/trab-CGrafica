@@ -170,8 +170,7 @@ function mobSpawn(position, value){
 
 	if(value == 1){ //Spawna Misseler
 		for(i = 0; i < mobs.length; i++){
-			if(mobs[i].position.x == position){
-			// if(mobs[i] == standMisseler){
+			if(mobs[i] == standMisseler){
 				auxiliar = true;
 			}
 		}
