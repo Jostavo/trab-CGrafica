@@ -176,12 +176,13 @@ function mobSpawn(position, value){
 		}
 
 		if(auxiliar != true){
-			standMisseler.scale.x *= -1;
-			standMisseler.position.set(position, 119, 30);
-			mobs.add(standMisseler);
-			mobsAnim.add(standMisselerAnim);
-			scene.add(standMisseler);
-			standMisselerClock = 0;
+			// standMisseler.scale.x *= -1;
+			// standMisseler.position.set(position, 119, 30);
+			// mobs.add(standMisseler);
+			// mobsAnim.add(standMisselerAnim);
+			// scene.add(standMisseler);
+			// standMisselerClock = 0;
+			changeAnim(standMisselerAnim, standMisseler, standingClock);
 		}
 	}else if (value == 2){ //Spawna Flying bee
 
