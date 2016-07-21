@@ -209,7 +209,7 @@ function update()//ITERAÇÕES DO LOOP
     shooting = true;
 
     if(running == true){
-      changeAnim(pewRunMegaman, pewRunMegaman, runningClock);
+      changeAnim(pewRunMegamanAnim, pewRunMegaman, runningClock);
     }else{
       changeAnim(pewpewMegamanAnim, pewpewMegaman, standingClock);
     }
