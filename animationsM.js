@@ -174,15 +174,15 @@ function mobSpawn(position, value){
 		// 		auxiliar = true;
 		// 	}
 		// }
-
+		megaman.x = megaman.x - 10;
 		// if(auxiliar != true){
 			// changeSide();
-			standMisseler.scale.x *= -1;
-			standMisseler.position.set(position, megaman.y, megaman.z);
-			mobs.push(standMisseler);
-			mobsAnim.push(standMisselerAnim);
-			scene.add(standMisseler);
-			standMisselerClock = 0;
+			// standMisseler.scale.x *= -1;
+			// standMisseler.position.set(position, megaman.y, megaman.z);
+			// mobs.push(standMisseler);
+			// mobsAnim.push(standMisselerAnim);
+			// scene.add(standMisseler);
+			// standMisselerClock = 0;
 		// }
 	}else if (value == 2){ //Spawna Flying bee
 
