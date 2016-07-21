@@ -17,6 +17,10 @@ var standMegamanAnim, walkMegamanAnim, jumpMegamanAnim, dashMegamanAnim, pewpewM
 var shooting = false;
 var running = false;
 var animEsquerda = false;
+var shootEsquerda = false;
+var standEsquerda = false;
+var shootRunEsquerda = false;
+var walkEsquerda = false;
 var standingClock = 3, runningClock = 5;//temporizadores de atualização p/ 'parado' e 'correndo'
 //-------------------OBJETOS GLOBAIS DE CONTROLE DE ANIMAÇÃO----------------------
 

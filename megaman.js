@@ -164,11 +164,20 @@ function update()//ITERAÇÕES DO LOOP
   // >>>TECLA "A" pressionada<<<
   if ( keyboard.down("A") || keyboard.pressed("A") ){
     running = true;
+    animEsquerda = true;
     // \/ Troca de animação 'parado' para 'andando' \/
     if(shooting == true){
       changeAnim(pewRunMegamanAnim, pewRunMegaman, runningClock);
+      if(shootRunEsquerda != true){
+        changeSide();
+        shootRunEsquerda = true;
+      }
     }else{
       changeAnim(walkMegamanAnim, walkMegaman, runningClock);
+      if(walkEsquerda != true){
+        changeSide();
+        walkEsquerda = true;
+      }
     }
 
     //-------------------COLISÃO----------------------
@@ -183,12 +192,13 @@ function update()//ITERAÇÕES DO LOOP
   // >>>TECLA "D" pressionada<<<
   if ( keyboard.down("D") || keyboard.pressed("D") ){
     running = true;
+    animEsquerda = false;
     // \/ Troca de animação 'parado' para 'andando' \/
     if(shooting == true){
       changeAnim(pewRunMegamanAnim, pewRunMegaman, runningClock);
-      if(shootEsquerda != false){
+      if(shootRunEsquerda != false){
         changeSide();
-        shootEsquerda = false;
+        shootRunEsquerda = false;
       }
     }else{
       changeAnim(walkMegamanAnim, walkMegaman, runningClock);
@@ -212,14 +222,15 @@ function update()//ITERAÇÕES DO LOOP
 
     if(running == true){
       changeAnim(pewRunMegamanAnim, pewRunMegaman, runningClock);
-      if(walkEsquerda != false){
+      if(animEsquerda != false && shootRunEsquerda != true){
         changeSide();
         shootRunEsquerda = true;
       }
     }else{
       changeAnim(pewpewMegamanAnim, pewpewMegaman, standingClock);
-      if(standEsquerda != false){
+      if(animEsquerda != false && shootEsquerda != true){
         changeSide();
+        shootEsquerda = true;
       }
     }
     // função de adicionar projetil
@@ -228,25 +239,58 @@ function update()//ITERAÇÕES DO LOOP
 
   // >>>TECLA "A", "D" ou "ESPAÇO" soltas<<<
   //Animação volta para o Megaman 'parado'
-  if( keyboard.up("A") || keyboard.up("D")) {
+  if( keyboard.up("A") ) {
     running = false;
+    animEsquerda = true;
     //qualquer uma das duas animações volta para 'parado'
     if(shooting == true){
       changeAnim(pewpewMegamanAnim, pewpewMegaman, standingClock);
+      if(shootEsquerda != true){
+        changeSide();
+        shootEsquerda = true;
+      }
     }else{
       changeAnim(standMegamanAnim, standMegaman, standingClock);
+      if(standEsquerda != true){
+        changeSide();
+        standEsquerda = true;
+      }
+    }
+  }else if( keyboard.up("D") ){
+    running = false;
+    animEsquerda = false;
+    //qualquer uma das duas animações volta para 'parado'
+    if(shooting == true){
+      changeAnim(pewpewMegamanAnim, pewpewMegaman, standingClock);
+      if(shootEsquerda != false){
+        changeSide();
+        shootEsquerda = false;
+      }
+    }else{
+      changeAnim(standMegamanAnim, standMegaman, standingClock);
+      if(standEsquerda != false){
+        changeSide();
+        standEsquerda = false;
+      }
     }
   }
   // >>>TECLA "ESPAÇO" solta<<<
   else if(keyboard.up("space"))
   {
-    aux = animEsquerda;
     shooting = false;
 
     if(running == true){
       changeAnim(walkMegamanAnim, walkMegaman, runningClock);
+      if(animEsquerda != false && walkEsquerda != true){
+        changeSide();
+        walkEsquerda = true;
+      }
     }else{
       changeAnim(standMegamanAnim, standMegaman, standingClock);
+      if(animEsquerda != false && standEsquerda != true){
+        changeSide();
+        standEsquerda = true;
+      }
     }
   }
   //-------------------CAPTURA DE EVENTOS DO TECLADO----------------------
