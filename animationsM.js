@@ -61,8 +61,8 @@ function initAnim(x, y, z)//FUNÇÃO DE CONTROLE DE ANIMAÇÃO
 		shotAnim = new TextureAnimator(shotTexture, 1, 1, 1, 30);//'projétil'
 		shotPoppingAnim = new TextureAnimator(shotPoppingTexture, 1, 3, 3, 30);//'colisão de projétil'
 		pewRunMegamanAnim = new TextureAnimator(pewRunMegamanTexture, 1, 11, 11, 30);//'atirando e correndo'
-		standMisselerAnim = new TextureAnimator(pewRunMegamanTexture, 1, 2, 2, 30);
-		attackingMisselerAnim = new TextureAnimator(pewRunMegamanTexture, 1, 10, 10, 30);
+		standMisselerAnim = new TextureAnimator(standMisselerTexture, 1, 2, 2, 30);
+		attackingMisselerAnim = new TextureAnimator(attackingMisselerTexture, 1, 10, 10, 30);
 		//-------------------CONTROLE DE ANIMAÇÃO DE TEXTURA------------------------
 
 		//-------------------MATERIAL DE ANIMAÇÃO DE TEXTURA------------------------
@@ -163,7 +163,7 @@ function animaMob(){
 }
 
 function mobSpawn(position, value){
-	var auxiliar;
+	var auxiliar = false;
 	var i;
 
 	if (value == 1){ //Spawna Misseler
@@ -174,9 +174,9 @@ function mobSpawn(position, value){
 		}
 
 		if(auxiliar != true){
-			scene.add(standMisseler);
 			standMisseler.scale.x *= -1;
 			standMisseler.position.set(position, 119, 30);
+			scene.add(standMisseler);
 			standMisselerClock = 0;
 		}
 	}else if (value == 2){ //Spawna Flying bee
