@@ -208,12 +208,16 @@ function update()//ITERAÇÕES DO LOOP
     // \/ Função que muda a animação pra posição de PEWPEWPEWPEW -= <> <> <> <> <> <> <>
     shooting = true;
 
-    if(animEsquerda == true){//flag de espelhamento da animação
+    if(running == true){
+      changeAnim(pewRunMegaman, pewRunMegaman, runningClock);
+    }else{
       changeAnim(pewpewMegamanAnim, pewpewMegaman, standingClock);
+    }
+
+    if(animEsquerda == true){//flag de espelhamento da animação
       changeSide();
     }
     // \/função de troca de animação auxiliar, pois ela não vira espelha a imagem internamente.
-    changeAnim2(pewpewMegamanAnim, pewpewMegaman, standingClock);
     // função de adicionar projetil
     shotSpawn();
   }
@@ -223,7 +227,11 @@ function update()//ITERAÇÕES DO LOOP
   if( keyboard.up("A") || keyboard.up("D")) {
     running = false;
     //qualquer uma das duas animações volta para 'parado'
-    changeAnim(standMegamanAnim, standMegaman, standingClock);
+    if(shooting == true){
+      changeAnim(pewpewMegamanAnim, pewpewMegaman, standingClock);
+    }else{
+      changeAnim(standMegamanAnim, standMegaman, standingClock);
+    }
     if( keyboard.up("A")){//a flag controle o 'lado' qual a animação antigo estava
       if(animEsquerda == false){
         changeSide();
