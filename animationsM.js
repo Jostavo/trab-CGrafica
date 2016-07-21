@@ -168,13 +168,15 @@ function mobSpawn(position, value){
 	var auxiliar = false;
 	var i;
 
+	camera.position.x -= 10;
 	if (value == 1){ //Spawna Misseler
 		// for(i = 0; i < mobs.length; i++){
 		// 	if(mobs[i].position.x == position){
 		// 		auxiliar = true;
 		// 	}
 		// }
-		megaman.x = megaman.x - 10;
+		megaman.x -= 10;
+		camera.position.x -= 10;
 		// if(auxiliar != true){
 			// changeSide();
 			// standMisseler.scale.x *= -1;
