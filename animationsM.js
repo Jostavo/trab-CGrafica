@@ -176,7 +176,7 @@ function mobSpawn(position, value){
 		}
 
 		if(auxiliar != true){
-			standMisseler.position.set(position, megaman.y+7, megaman.z);
+			standMisseler.position.set(position, megaman.y+7, megaman.z-1);
 			mobs.push(standMisseler);
 			mobsAnim.push(standMisselerAnim);
 			scene.add(standMisseler);
