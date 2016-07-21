@@ -168,11 +168,11 @@ function animaMob(){
 }
 
 function animaMissiler(){
-
+	
 }
 
 function animaFlying(){
-	
+
 }
 
 function mobSpawn(position, value){
