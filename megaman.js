@@ -171,11 +171,6 @@ function update()//ITERAÇÕES DO LOOP
       changeAnim(walkMegamanAnim, walkMegaman, runningClock);
     }
 
-    if(animEsquerda != true){
-      animEsquerda = true;
-      changeSide();
-    }
-
     //-------------------COLISÃO----------------------
     //Controla a câmera (para a câmera não passar dos limites)
     if(camera.position.x > -3730 && animationPic.position.x <= camera.position.x)
@@ -224,7 +219,10 @@ function update()//ITERAÇÕES DO LOOP
   if( keyboard.up("A") || keyboard.up("D")) {
     running = false;
     if( keyboard.up("A")){
-      animEsquerda = true;
+      if(animEsquerda != true){
+        animEsquerda = true;
+        changeSide();
+      }
     }
     //qualquer uma das duas animações volta para 'parado'
     if(shooting == true){
