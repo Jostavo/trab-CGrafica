@@ -206,6 +206,7 @@ function update()//ITERAÇÕES DO LOOP
   // >>>TECLA "ESPAÇO" pressionada<<<
   if ( keyboard.down("space")){
     // \/ Função que muda a animação pra posição de PEWPEWPEWPEW -= <> <> <> <> <> <> <>
+    aux = animEsquerda;
     shooting = true;
 
     if(running == true){
@@ -214,7 +215,7 @@ function update()//ITERAÇÕES DO LOOP
       changeAnim(pewpewMegamanAnim, pewpewMegaman, standingClock);
     }
 
-    if(animEsquerda == true){//flag de espelhamento da animação
+    if(aux == true){//flag de espelhamento da animação
       changeSide();
     }
     // \/função de troca de animação auxiliar, pois ela não vira espelha a imagem internamente.
@@ -232,6 +233,7 @@ function update()//ITERAÇÕES DO LOOP
     }else{
       changeAnim(standMegamanAnim, standMegaman, standingClock);
     }
+
     if( keyboard.up("A")){//a flag controle o 'lado' qual a animação antigo estava
       if(animEsquerda == false){
         changeSide();
@@ -241,6 +243,7 @@ function update()//ITERAÇÕES DO LOOP
   // >>>TECLA "ESPAÇO" solta<<<
   else if(keyboard.up("space"))
   {
+    aux = animEsquerda;
     shooting = false;
 
     if(running == true){
@@ -249,7 +252,7 @@ function update()//ITERAÇÕES DO LOOP
       changeAnim(standMegamanAnim, standMegaman, standingClock);
     }
 
-    if(animEsquerda == true){//flag de controle do lado da animação
+    if(aux == true){//flag de controle do lado da animação
       changeSide();//WOLOLOOOO
     }
   }

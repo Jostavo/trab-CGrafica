@@ -136,24 +136,6 @@ function changeAnim(novaAnim, novaImg, clockzin){//FUNÇÃO de troca de animaç�
     scene.add(animationPic);// Adiciona na cena
 		//-------------------CONTROLE DE CENA--------------------------
 }
-/*FUNÇÃO SIMILAR A FUNÇÃO ACIMA (changeAnim),
-apenas usada para mostrar o megaman para o lado direito,
-pois ela não não tem controle de espelhamento interno.
-COMENTÁRIOS mais explicativos são encontrados na fç changeAnim()*/
-function changeAnim2(novaAnim, novaImg, clockzin){
-    // Salva as coordenadas antigas do objeto final
-    megaman.x = animationPic.position.x;
-    megaman.y = animationPic.position.y;
-    megaman.z = animationPic.position.z;
-    scene.remove(animationPic);// Remove objeto final antigo da cena
-    // Muda os objetos de controle para texturas/animações novas novas
-    animation = novaAnim;
-    animationPic = novaImg;
-    updateClock = clockzin;
-    // Atribui a posição do objeto finalantigo ao objeto finalnovo
-    animationPic.position.set(megaman.x,megaman.y,megaman.z);
-    scene.add(animationPic); // Adiciona na cena
-}
 
 function changeSide(){ //FUNÇÃO de controle de espelhamento da animação
 	//------------------ESPELHAMENTO PARA DIREITA--------------------------
