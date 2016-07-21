@@ -174,10 +174,9 @@ function mobSpawn(position, value){
 				auxiliar = true;
 			}
 		}
-		
+
 		if(auxiliar != true){
-			standMisseler.scale.x *= -1;
-			standMisseler.position.set(position, megaman.y, megaman.z);
+			standMisseler.position.set(position, megaman.y+4, megaman.z);
 			mobs.push(standMisseler);
 			mobsAnim.push(standMisselerAnim);
 			scene.add(standMisseler);
