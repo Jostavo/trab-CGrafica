@@ -164,12 +164,16 @@ function update()//ITERAÇÕES DO LOOP
   // >>>TECLA "A" pressionada<<<
   if ( keyboard.down("A") || keyboard.pressed("A") ){
     running = true;
-    animEsquerda = true;
     // \/ Troca de animação 'parado' para 'andando' \/
     if(shooting == true){
       changeAnim(pewRunMegamanAnim, pewRunMegaman, runningClock);
     }else{
       changeAnim(walkMegamanAnim, walkMegaman, runningClock);
+    }
+
+    if(animEsquerda != true){
+      animEsquerda = true;
+      changeSide();
     }
 
     //-------------------COLISÃO----------------------
