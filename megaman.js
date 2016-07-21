@@ -153,11 +153,6 @@ function update()//ITERAÇÕES DO LOOP
   //-------------------ATUALIZAÇÃO DE OBJETOS----------------------
   keyboard.update(); // Atualiza listener do teclado
   animation.update(updateClock); //Update das animações c/ tempo de clock
-  // for(var i = 0; i < mobs.lenght+1; i++){
-  //   auxiliar = mobsAnim[i];
-  //   auxiliar.update(updateClock);
-  // }
-  standMisselerAnim.update(updateClock);
   //-------------------ATUALIZAÇÃO DE OBJETOS----------------------
 
   //-------------------FUNÇÃO DE ANIMAÇÃO DE PROJÉTEIS----------------------

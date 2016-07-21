@@ -161,7 +161,18 @@ function changeSide(){ //FUNÇÃO de controle de espelhamento da animação
 }
 
 function animaMob(){
+	for(var i = 0; i < mobsAnim.lenght; i++){
+    auxiliar = mobsAnim[i];
+    auxiliar.update(updateClock);
+  }
+}
 
+function animaMissiler(){
+
+}
+
+function animaFlying(){
+	
 }
 
 function mobSpawn(position, value){
@@ -183,19 +194,18 @@ function mobSpawn(position, value){
 			standMisselerClock = 0;
 		}
 	}else if(value == 2){ //Spawna Flying bee
-		// for(i = 0; i < mobs.length; i++){
-		// 	if(mobs[i].position.x == position){
-		// 		auxiliar = true;
-		// 	}
-		// }
-		//
-		// if(auxiliar != true){
-		// 	standMisseler.position.set(position, megaman.y+5, megaman.z - 5);
-		// 	mobs.push(standMisseler);
-		// 	mobsAnim.push(standMisselerAnim);
-		// 	scene.add(standMisseler);
-		// 	standMisselerClock = 0;
-		// }
+		for(i = 0; i < mobs.length; i++){
+			if(mobs[i] == flyingBee){
+				auxiliar = true;
+			}
+		}
+
+		if(auxiliar != true){
+			flyingBee.position.set( );
+			mobs.push(flyingBee);
+			mobsAnim.push(flyingBeeAnim);
+			scene.add(flyingBee);
+		}
 	}
 }
 
