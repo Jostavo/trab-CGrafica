@@ -183,12 +183,19 @@ function update()//ITERAÇÕES DO LOOP
   // >>>TECLA "D" pressionada<<<
   if ( keyboard.down("D") || keyboard.pressed("D") ){
     running = true;
-    animEsquerda = false;
     // \/ Troca de animação 'parado' para 'andando' \/
     if(shooting == true){
       changeAnim(pewRunMegamanAnim, pewRunMegaman, runningClock);
+      if(shootEsquerda != false){
+        changeSide();
+        shootEsquerda = false;
+      }
     }else{
       changeAnim(walkMegamanAnim, walkMegaman, runningClock);
+      if(walkEsquerda != false){
+        changeSide();
+        walkEsquerda = false;
+      }
     }
 
     //-------------------CONTROLE DE CÂMERA----------------------
@@ -205,11 +212,16 @@ function update()//ITERAÇÕES DO LOOP
 
     if(running == true){
       changeAnim(pewRunMegamanAnim, pewRunMegaman, runningClock);
+      if(walkEsquerda != false){
+        changeSide();
+        shootRunEsquerda = true;
+      }
     }else{
       changeAnim(pewpewMegamanAnim, pewpewMegaman, standingClock);
+      if(standEsquerda != false){
+        changeSide();
+      }
     }
-
-    // \/função de troca de animação auxiliar, pois ela não vira espelha a imagem internamente.
     // função de adicionar projetil
     shotSpawn();
   }
@@ -218,12 +230,6 @@ function update()//ITERAÇÕES DO LOOP
   //Animação volta para o Megaman 'parado'
   if( keyboard.up("A") || keyboard.up("D")) {
     running = false;
-    if( keyboard.up("A")){
-      if(animEsquerda != true){
-        animEsquerda = true;
-        changeSide();
-      }
-    }
     //qualquer uma das duas animações volta para 'parado'
     if(shooting == true){
       changeAnim(pewpewMegamanAnim, pewpewMegaman, standingClock);

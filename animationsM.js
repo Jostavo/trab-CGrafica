@@ -16,7 +16,7 @@ var standMegamanAnim, walkMegamanAnim, jumpMegamanAnim, dashMegamanAnim, pewpewM
 //-------------------OBJETOS GLOBAIS DE CONTROLE DE ANIMAÇÃO----------------------
 var shooting = false;
 var running = false;
-var animEsquerda = false;//flag para espelhamento de animação
+var animEsquerda = false;
 var standingClock = 3, runningClock = 5;//temporizadores de atualização p/ 'parado' e 'correndo'
 //-------------------OBJETOS GLOBAIS DE CONTROLE DE ANIMAÇÃO----------------------
 
@@ -109,15 +109,6 @@ function initAnim(x, y, z)//FUNÇÃO DE CONTROLE DE ANIMAÇÃO
 
 function changeAnim(novaAnim, novaImg, clockzin){//FUNÇÃO de troca de animação
 		//params = textura animada, obj final de animação, temporizador de animação
-		//-------------------TRATAMENTO DE ESPELHAMENTO--------------------------
-		//Quando a anim. está espelhada,volta a anim. ao normal antes de salvar
-		var aux = animEsquerda;
-
-    if(animEsquerda == true){
-      changeSide();
-    }
-		//-------------------TRATAMENTO DE ESPELHAMENTO--------------------------
-
 		//-------------------MANTÉM COORDENADAS DE ANIMAÇÃO-------------------------
     megaman.x = animationPic.position.x;
     megaman.y = animationPic.position.y;
@@ -135,26 +126,11 @@ function changeAnim(novaAnim, novaImg, clockzin){//FUNÇÃO de troca de animaç�
 		//Posiciona o novo objeto final na posição do objeto final antigo
 		animationPic.position.set(megaman.x,megaman.y,megaman.z);
     scene.add(animationPic);// Adiciona na cena
-
-		if(aux == true){
-			changeSide();
-		}
 		//-------------------CONTROLE DE CENA--------------------------
 }
 
 function changeSide(){ //FUNÇÃO de controle de espelhamento da animação
-	//------------------ESPELHAMENTO PARA DIREITA--------------------------
-	if(animEsquerda == true){
-		animEsquerda = false;
   	animationPic.scale.x *= -1;
-	//------------------ESPELHAMENTO PARA DIREITA--------------------------
-
-	//------------------ESPELHAMENTO PARA ESQUERDA--------------------------
-	}else{
-		animEsquerda = true;
-  	animationPic.scale.x *= -1;
-	//------------------ESPELHAMENTO PARA ESQUERDA--------------------------
-	}
 }
 
 function shotSpawn(){ //FUNÇÃO para inserção de projéteis na cena
