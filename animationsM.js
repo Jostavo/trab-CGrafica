@@ -161,7 +161,7 @@ function changeSide(){ //FUNÇÃO de controle de espelhamento da animação
 }
 
 function animaMob(){
-
+	
 }
 
 function mobSpawn(position, value){
