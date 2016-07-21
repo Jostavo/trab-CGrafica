@@ -219,6 +219,9 @@ function update()//ITERAÇÕES DO LOOP
   //Animação volta para o Megaman 'parado'
   if( keyboard.up("A") || keyboard.up("D")) {
     running = false;
+    if( keyboard.up("A")){
+      animEsquerda = true;
+    }
     //qualquer uma das duas animações volta para 'parado'
     if(shooting == true){
       changeAnim(pewpewMegamanAnim, pewpewMegaman, standingClock);
