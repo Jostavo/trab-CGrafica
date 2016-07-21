@@ -164,16 +164,14 @@ function update()//ITERAÇÕES DO LOOP
   // >>>TECLA "A" pressionada<<<
   if ( keyboard.down("A") || keyboard.pressed("A") ){
     running = true;
+    animEsquerda = true;
     // \/ Troca de animação 'parado' para 'andando' \/
     if(shooting == true){
       changeAnim(pewRunMegamanAnim, pewRunMegaman, runningClock);
     }else{
       changeAnim(walkMegamanAnim, walkMegaman, runningClock);
     }
-    // Caso a textura não esteja virada para a esquerda, vira
-    if(animEsquerda == false){//flag de controle para qual lado está a animação
-      changeSide();//função que vira a animação
-    }
+
     //-------------------COLISÃO----------------------
     //Controla a câmera (para a câmera não passar dos limites)
     if(camera.position.x > -3730 && animationPic.position.x <= camera.position.x)
@@ -186,16 +184,14 @@ function update()//ITERAÇÕES DO LOOP
   // >>>TECLA "D" pressionada<<<
   if ( keyboard.down("D") || keyboard.pressed("D") ){
     running = true;
+    animEsquerda = false;
     // \/ Troca de animação 'parado' para 'andando' \/
     if(shooting == true){
       changeAnim(pewRunMegamanAnim, pewRunMegaman, runningClock);
     }else{
       changeAnim(walkMegamanAnim, walkMegaman, runningClock);
     }
-    // Caso a textura não esteja virada para a esquerda, vira
-    if(animEsquerda == true){//flag de controle ao contrário da tecla "A"
-      changeSide();//função que vira a animação
-    }
+
     //-------------------CONTROLE DE CÂMERA----------------------
     //se o megaman estiver fora do centro, espera ele centralizar
     if( !(animationPic.position.x < camera.position.x) )
@@ -206,7 +202,6 @@ function update()//ITERAÇÕES DO LOOP
   // >>>TECLA "ESPAÇO" pressionada<<<
   if ( keyboard.down("space")){
     // \/ Função que muda a animação pra posição de PEWPEWPEWPEW -= <> <> <> <> <> <> <>
-    aux = animEsquerda;
     shooting = true;
 
     if(running == true){
@@ -215,9 +210,6 @@ function update()//ITERAÇÕES DO LOOP
       changeAnim(pewpewMegamanAnim, pewpewMegaman, standingClock);
     }
 
-    if(aux == true){//flag de espelhamento da animação
-      changeSide();
-    }
     // \/função de troca de animação auxiliar, pois ela não vira espelha a imagem internamente.
     // função de adicionar projetil
     shotSpawn();
@@ -233,12 +225,6 @@ function update()//ITERAÇÕES DO LOOP
     }else{
       changeAnim(standMegamanAnim, standMegaman, standingClock);
     }
-
-    if( keyboard.up("A")){//a flag controle o 'lado' qual a animação antigo estava
-      if(animEsquerda == false){
-        changeSide();
-      }
-    }
   }
   // >>>TECLA "ESPAÇO" solta<<<
   else if(keyboard.up("space"))
@@ -250,10 +236,6 @@ function update()//ITERAÇÕES DO LOOP
       changeAnim(walkMegamanAnim, walkMegaman, runningClock);
     }else{
       changeAnim(standMegamanAnim, standMegaman, standingClock);
-    }
-
-    if(aux == true){//flag de controle do lado da animação
-      changeSide();//WOLOLOOOO
     }
   }
   //-------------------CAPTURA DE EVENTOS DO TECLADO----------------------

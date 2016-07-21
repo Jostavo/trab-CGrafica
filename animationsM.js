@@ -111,9 +111,10 @@ function changeAnim(novaAnim, novaImg, clockzin){//FUNÇÃO de troca de animaç�
 		//params = textura animada, obj final de animação, temporizador de animação
 		//-------------------TRATAMENTO DE ESPELHAMENTO--------------------------
 		//Quando a anim. está espelhada,volta a anim. ao normal antes de salvar
+		aux = animEsquerda;
+
     if(animEsquerda == true){
-      animationPic.scale.x *= -1;//desvira
-      animEsquerda = false;
+      changeSide();
     }
 		//-------------------TRATAMENTO DE ESPELHAMENTO--------------------------
 
@@ -134,6 +135,10 @@ function changeAnim(novaAnim, novaImg, clockzin){//FUNÇÃO de troca de animaç�
 		//Posiciona o novo objeto final na posição do objeto final antigo
 		animationPic.position.set(megaman.x,megaman.y,megaman.z);
     scene.add(animationPic);// Adiciona na cena
+
+		if(aux == true){
+			changeSide();
+		}
 		//-------------------CONTROLE DE CENA--------------------------
 }
 
