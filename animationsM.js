@@ -10,6 +10,12 @@ var standMegamanTexture, walkMegamanTexture, jumpMegamanTexture, dashMegamanText
 var standMegamanMaterial, walkMegamanMaterial, jumpMegamanMaterial, dashMegamanMaterial, pewpewMegamanMaterial, shotMaterial, shotPoppingMaterial, pewRunMegamanMaterial;
 //objetos intermediários de animação de textura
 var standMegamanAnim, walkMegamanAnim, jumpMegamanAnim, dashMegamanAnim, pewpewMegamanAnim, shotAnim, shotPoppingAnim, pewRunMegamanAnim;
+
+var standMisseler, attackingMisseler;
+var standMisselerTexture, attackingMisselerTexture;
+var standMisselerMaterial, attackingMisselerMaterial;
+var standMisselerAnim, attackingMisselerAnim;
+var misselerPlane,attMisselerPlane;
 //-------------------OBJETOS GLOBAIS DE ANIMAÇÃO----------------------
 
 
@@ -39,6 +45,9 @@ function initAnim(x, y, z)//FUNÇÃO DE CONTROLE DE ANIMAÇÃO
 		shotPoppingTexture.minFilter = THREE.LinearFilter;//impede redimensionamento automático de imagem.
 		pewRunMegamanTexture = new THREE.ImageUtils.loadTexture('sprites/mmx/prMmx.png');//text. 'atirando e correndo'
 		pewRunMegamanTexture.minFilter = THREE.LinearFilter;//impede redimensionamento automático de imagem.
+
+		standMisselerTexture = new THREE.ImageUtils.loadTexture('sprites/mmx/misseler.png');
+		attackingMisselerTexture = new THREE.ImageUtils.loadTexture('sprites/mmx/firesseler.png');
 		//------------------------CONTROLE DE TEXTURA-------------------------------
 
 		//-------------------CONTROLE DE ANIMAÇÃO DE TEXTURA-------------------------
@@ -52,6 +61,8 @@ function initAnim(x, y, z)//FUNÇÃO DE CONTROLE DE ANIMAÇÃO
 		shotAnim = new TextureAnimator(shotTexture, 1, 1, 1, 30);//'projétil'
 		shotPoppingAnim = new TextureAnimator(shotPoppingTexture, 1, 3, 3, 30);//'colisão de projétil'
 		pewRunMegamanAnim = new TextureAnimator(pewRunMegamanTexture, 1, 11, 11, 30);//'atirando e correndo'
+		standMisselerAnim = new TextureAnimator(pewRunMegamanTexture, 1, 2, 2, 30);
+		attackingMisselerAnim = new TextureAnimator(pewRunMegamanTexture, 1, 10, 10, 30);
 		//-------------------CONTROLE DE ANIMAÇÃO DE TEXTURA------------------------
 
 		//-------------------MATERIAL DE ANIMAÇÃO DE TEXTURA------------------------
@@ -71,11 +82,17 @@ function initAnim(x, y, z)//FUNÇÃO DE CONTROLE DE ANIMAÇÃO
 			map: shotPoppingTexture, side: THREE.DoubleSide, transparent: true} );
 		pewRunMegamanMaterial = new THREE.MeshBasicMaterial({ //megaman 'atirando e correndo'
 			map: pewRunMegamanTexture, side: THREE.DoubleSide, transparent: true} );
+		standMisselerMaterial = new THREE.MeshBasicMaterial({
+			map: standMisselerTexture, side: THREE.DoubleSide, transparent: true} );
+		attackingMisselerMaterial = new THREE.MeshBasicMaterial({
+			map: attackingMisselerTexture, side: THREE.DoubleSide, transparent: true} );
 		//-------------------MATERIAL DE ANIMAÇÃO DE TEXTURA------------------------
 
     //-------------------GEOMETRIA DA ANIMAÇÃO---------------------------
     megamanPlane = new THREE.PlaneGeometry( 39, 35 );
 		shotPlane = new THREE.PlaneGeometry( 18, 15 );
+		misselerPlane = new THREE.PlaneGeometry( 48, 58 );
+		attMisselerPlane = new THREE.PlaneGeometry( 52, 62 );
 		//-------------------GEOMETRIA DA ANIMAÇÃO---------------------------
 
     //-------------------FUSÃO DE ANIMAÇÃO DE TEXTURA---------------------------
@@ -85,6 +102,8 @@ function initAnim(x, y, z)//FUNÇÃO DE CONTROLE DE ANIMAÇÃO
     walkMegaman = new THREE.Mesh(megamanPlane, walkMegamanMaterial);
 		pewpewMegaman = new THREE.Mesh(megamanPlane, pewpewMegamanMaterial);
 		pewRunMegaman = new THREE.Mesh(megamanPlane, pewRunMegamanMaterial);
+		standMisseler = new THREE.Mesh(misselerPlane, standMisselerMaterial);
+		attackingMisseler = new THREE.Mesh(misselerPlane, attackingMisselerMaterial);
 		//VERIFICAR se faltou mesh do tiro
 		//-------------------FUSÃO DE ANIMAÇÃO DE TEXTURA---------------------------
 
@@ -93,6 +112,8 @@ function initAnim(x, y, z)//FUNÇÃO DE CONTROLE DE ANIMAÇÃO
     walkMegaman.scale.set(0.6,0.6,0.6);
 		pewpewMegaman.scale.set(0.6,0.6,0.6);
 		pewRunMegaman.scale.set(0.6,0.6,0.6);
+		standMisseler.scale.set(0.6,0.6,0.6);
+		attackingMisseler.scale.set(0.6,0.6,0.6);
 		//shotPopping.scale.set(0.035,0.035,0.035);
 		//-------------------ESCALA DE TAMANHO DE ANIMAÇÃO--------------------------
 
@@ -135,6 +156,40 @@ function changeAnim(novaAnim, novaImg, clockzin){//FUNÇÃO de troca de animaç�
 
 function changeSide(){ //FUNÇÃO de controle de espelhamento da animação
   	animationPic.scale.x *= -1;
+}
+
+function animaMob(){
+
+}
+
+function mobSpawn(position, value){
+	var auxiliar;
+	var i;
+
+	if (value == 1){ //Spawna Misseler
+		for(i = 0; i < mobs.length; i++){
+			if(mobs[i] == standMisseler || mobs[i] == attackingMisseler){
+				auxiliar = true;
+			}
+		}
+
+		if(auxiliar != true){
+			scene.add(standMisseler);
+			standMisseler.scale.x *= -1;
+			standMisseler.position.set(position, 119, 30);
+			standMisselerClock = 0;
+		}
+	}else if (value == 2){ //Spawna Flying bee
+
+	}
+}
+
+function collisionCheck(){
+
+}
+
+function gameOver(){
+
 }
 
 function shotSpawn(){ //FUNÇÃO para inserção de projéteis na cena

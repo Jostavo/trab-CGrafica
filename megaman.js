@@ -1,5 +1,6 @@
 //-------------------VETORES DE CONTROLE DE OBJETOS----------------------
 var mobs = []; //VETOR PARA ALOCAÇÃO DE TODOS OS MONSTROS ATIVOS NA CENA
+var mobShot = [];
 var shots = []; //VETOR PARA ALOCAÇÃO DE TODOS PROJÉTEIS DISPARADOS NA CENA
 //-------------------VETORES DE CONTROLE DE OBJETOS----------------------
 
@@ -11,6 +12,8 @@ var scene, camera, renderer, keyboard; //keyboard recebe os eventos do teclado
 var animation; //VARIÁVEL COM ANIMAÇÃO COMPLETA
 var animationPic; //VARIÁVEL COM AS IMAGENS DE ANIMAÇÃO
 var updateClock; //TIMER PARA ATUALIZAR A ANIMAÇÃO
+var standMisselerClock;
+var attackingMisselerClock;
 //-------------------ANIMAÇÃO----------------------
 
 //-------------------ELEMENTOS DE CENA----------------------
@@ -213,6 +216,11 @@ function update()//ITERAÇÕES DO LOOP
     if( !(animationPic.position.x < camera.position.x) )
       camera.translateX( moveDistance );//move a camera junto se ele estiver ao centro
     //-------------------CONTROLE DE CÂMERA----------------------
+
+    if(camera.position.x > -3600){
+      mobSpawn(-3500, 1);
+    }
+
     animationPic.translateX( moveDistance );//move o megaman
   }
   // >>>TECLA "ESPAÇO" pressionada<<<
