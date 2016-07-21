@@ -168,8 +168,7 @@ function mobSpawn(position, value){
 	var auxiliar = false;
 	var i;
 
-	camera.position.x -= 10;
-	if (value == 1){ //Spawna Misseler
+	if(value == 1){ //Spawna Misseler
 		// for(i = 0; i < mobs.length; i++){
 		// 	if(mobs[i].position.x == position){
 		// 		auxiliar = true;
