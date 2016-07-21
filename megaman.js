@@ -1,5 +1,6 @@
 //-------------------VETORES DE CONTROLE DE OBJETOS----------------------
 var mobs = []; //VETOR PARA ALOCAÇÃO DE TODOS OS MONSTROS ATIVOS NA CENA
+var mobsAnim = [];
 var mobShot = [];
 var shots = []; //VETOR PARA ALOCAÇÃO DE TODOS PROJÉTEIS DISPARADOS NA CENA
 //-------------------VETORES DE CONTROLE DE OBJETOS----------------------
@@ -151,7 +152,9 @@ function update()//ITERAÇÕES DO LOOP
   //-------------------ATUALIZAÇÃO DE OBJETOS----------------------
   keyboard.update(); // Atualiza listener do teclado
   animation.update(updateClock); //Update das animações c/ tempo de clock
-  standMisselerAnim.update(updateClock);
+  for(var i = 0; i < mobsAnim.lenght; i++){
+    mobsAnim[i].update(updateClock);
+  }
   //-------------------ATUALIZAÇÃO DE OBJETOS----------------------
 
   //-------------------FUNÇÃO DE ANIMAÇÃO DE PROJÉTEIS----------------------

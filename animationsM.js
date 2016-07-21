@@ -47,7 +47,9 @@ function initAnim(x, y, z)//FUNÇÃO DE CONTROLE DE ANIMAÇÃO
 		pewRunMegamanTexture.minFilter = THREE.LinearFilter;//impede redimensionamento automático de imagem.
 
 		standMisselerTexture = new THREE.ImageUtils.loadTexture('sprites/mmx/misseler.png');
+		standMisselerTexture.minFilter = THREE.LinearFilter;
 		attackingMisselerTexture = new THREE.ImageUtils.loadTexture('sprites/mmx/firesseler.png');
+		attackingMisselerTexture.minFilter = THREE.LinearFilter;
 		//------------------------CONTROLE DE TEXTURA-------------------------------
 
 		//-------------------CONTROLE DE ANIMAÇÃO DE TEXTURA-------------------------
@@ -103,7 +105,7 @@ function initAnim(x, y, z)//FUNÇÃO DE CONTROLE DE ANIMAÇÃO
 		pewpewMegaman = new THREE.Mesh(megamanPlane, pewpewMegamanMaterial);
 		pewRunMegaman = new THREE.Mesh(megamanPlane, pewRunMegamanMaterial);
 		standMisseler = new THREE.Mesh(misselerPlane, standMisselerMaterial);
-		attackingMisseler = new THREE.Mesh(misselerPlane, attackingMisselerMaterial);
+		attackingMisseler = new THREE.Mesh(attMisselerPlane, attackingMisselerMaterial);
 		//VERIFICAR se faltou mesh do tiro
 		//-------------------FUSÃO DE ANIMAÇÃO DE TEXTURA---------------------------
 
@@ -176,6 +178,8 @@ function mobSpawn(position, value){
 		if(auxiliar != true){
 			standMisseler.scale.x *= -1;
 			standMisseler.position.set(position, 119, 30);
+			mobs.add(standMisseler);
+			mobsAnim.add(standMisselerAnim);
 			scene.add(standMisseler);
 			standMisselerClock = 0;
 		}
