@@ -218,7 +218,7 @@ function update()//ITERAÇÕES DO LOOP
       camera.translateX( moveDistance );//move a camera junto se ele estiver ao centro
     //-------------------CONTROLE DE CÂMERA----------------------
 
-    if(camera.position.x > -3600){
+    if(camera.position.x == -3600){
       mobSpawn(-3500, 1);
     }
 
