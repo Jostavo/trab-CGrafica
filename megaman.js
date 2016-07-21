@@ -65,13 +65,21 @@ function init() {//PEGUE SUA TOALHA QUE A JORNADA VAI COMEÇAR
     //VERIFICAR ^^^ chance de bug na sombra?
     //-------------------CÂMERA----------------------
 
+    //-------------------CRIAÇÃO DA LUA----------------------
+    var geometry = new THREE.SphereGeometry( 15, 16, 16 );
+    var material = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('sprites/moon.jpg') } );
+    mesh = new THREE.Mesh( geometry, material );
+    mesh.position.set(-3720, 140, 5);
+    scene.add(mesh);
+    //-------------------CRIAÇÃO DA LUA----------------------
+
     //função para ADICIONAR LUZESSSS
     addLights();//afinal todo paladino precisa da Luz
 
     //-------------------MATERIAL DOS PLANOS----------------------
     // É criado o material para ser aplicado no Mesh(objeto)
     backgroundMaterial = new THREE.MeshBasicMaterial(
-      { map: backgroundTexture, side: THREE.DoubleSide, transparent: true } );
+      { map: backgroundTexture, side: THREE.DoubleSide, transparent: true }  );
     foregroundMaterial = new THREE.MeshBasicMaterial(
       { map: foregroundTexture,transparent: true } );
     //-------------------MATERIAL DOS PLANOS----------------------
@@ -118,8 +126,10 @@ function addLights()//funçao de adicionar luz na cena
 {
   //-------------------LUZES----------------------
   var light = new THREE.DirectionalLight(0xffffff);//Luz branca direcionada
-  light.position.set(-3730, 119, 30)//posição da luz
+  var amblight = new THREE.AmbientLight(0x990000);//luz carmim ambiente
+  light.position.set(50, 50, 30)//posição da luz
 	scene.add(light);
+  scene.add(amblight);
   //VERIFICAR POSIÇÃO DA LUZ
   //-------------------LUZES----------------------
 }
