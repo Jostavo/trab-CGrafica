@@ -171,7 +171,6 @@ function changeSide(){ //FUNÇÃO de controle de espelhamento da animação
 }
 
 function animaMob(){
-	changeSide();
 	for(var i = 0; i < mobsAnim.lenght; i++){
 		changeSide();
     auxiliar = mobsAnim[i];
