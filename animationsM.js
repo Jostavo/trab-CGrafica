@@ -177,7 +177,7 @@ function animaMob(){
     mobs[i].anima.update(updateClock);
 
 		if(mobs[i].sprite == flyingBee){
-			if(iteracao < 100000){
+			if(iteracao < 50000){
 				mobs[i].x = pontosCurva.vertices[iteracao].x;
 				mobs[i].y = pontosCurva.vertices[iteracao].y;
 				mobs[i].z = pontosCurva.vertices[iteracao].z;
@@ -221,7 +221,7 @@ function mobSpawn(position, value){
 			}
 		}
 
-		if(auxiliarBee < 2){
+		if(auxiliarBee < 1){
 			var flyingB = {x: position, y: megaman.y+5, z: megaman.z - 5, hp: 2, sprite: flyingBee, anima: flyingBeeAnim};
 			flyingB.sprite.position.set(flyingB.x, flyingB.y, flyingB.z);
 			mobs.push(flyingB);
@@ -233,7 +233,7 @@ function mobSpawn(position, value){
 			new THREE.Vector3( megaman.x, megaman.y, megaman.z - 5 ));
 
 			pontosCurva = new THREE.Geometry();
-			pontosCurva.vertices = curvaBezier.getPoints(100000);
+			pontosCurva.vertices = curvaBezier.getPoints(50000);
 			iteracao = 0;
 		}
 	}
