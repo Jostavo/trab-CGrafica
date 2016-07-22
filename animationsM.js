@@ -206,13 +206,11 @@ function mobSpawn(position, value){
 			}
 		}
 
-		if(auxiliar != true){
-			standMisseler.position.set(position, megaman.y+5, megaman.z - 5);
-			mobs.push(standMisseler);
-			mobsAnim.push(standMisselerAnim);
-			mobHP.push(7);
-			scene.add(standMisseler);
-			standMisselerClock = 0;
+		if(auxiliar != true
+			var misseler = {x: position, y: megaman.y+5, z: megaman.z - 5, hp: 7, sprite: standMisseler, anima: standMisselerAnim, clock: 0};
+			misseler.sprite.position.set(misseler.x, misseler.y, misseler.z);
+			mobs.push(misseler);
+			scene.add(misseler.sprite);
 		}
 	}else if(value == 2){ //Spawna Flying bee
 		for(i = 0; i < mobs.length; i++){
