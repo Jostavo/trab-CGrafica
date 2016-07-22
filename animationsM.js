@@ -179,6 +179,7 @@ function animaMob(){
 			if(iteracao < 10){
 				flyingBee.position.set(pontosCurva.vertices[iteracao].x, pontosCurva.vertices[iteracao].y, pontosCurva.vertices[iteracao].z);
 				iteracao++;
+			}
 		}
   }
 }
