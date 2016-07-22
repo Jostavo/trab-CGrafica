@@ -216,7 +216,7 @@ function mobSpawn(position, value){
 		}
 	}else if(value == 2){ //Spawna Flying bee
 		for(i = 0; i < mobs.length; i++){
-			if(mobs[i] == flyingBee){
+			if(mobs[i] == flyingB){
 				auxiliarBee++;
 			}
 		}
