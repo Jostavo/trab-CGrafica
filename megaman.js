@@ -1,8 +1,6 @@
 //-------------------VETORES DE CONTROLE DE OBJETOS----------------------
 var mobs = []; //VETOR PARA ALOCAÇÃO DE TODOS OS MONSTROS ATIVOS NA CENA
-var mobsAnim = [];
 var mobShot = [];
-var mobHP = [];
 var shots = []; //VETOR PARA ALOCAÇÃO DE TODOS PROJÉTEIS DISPARADOS NA CENA
 //-------------------VETORES DE CONTROLE DE OBJETOS----------------------
 
