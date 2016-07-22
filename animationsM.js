@@ -172,14 +172,15 @@ function changeSide(){ //FUNÇÃO de controle de espelhamento da animação
 
 function animaMob(){
 	var i;
-	for(i = 0; i < mobsAnim.lenght; i++){
-		changeSide();
-    auxiliar = mobsAnim[i];
-    auxiliar.update(updateClock);
+	for(i = 0; i < mobs.length; i++){
+    mobs[i].anima.update(updateClock);
 
-		if(auxiliar == flyingBee){
+		if(mobs[i].sprite == flyingBee){
 			if(iteracao < 10){
-				flyingBee.position.set(pontosCurva.vertices[iteracao].x, pontosCurva.vertices[iteracao].y, pontosCurva.vertices[iteracao].z);
+				mobs[i].x = pontosCurva.vertices[iteracao].x;
+				mobs[i].y = pontosCurva.vertices[iteracao].y;
+				mobs[i].z = pontosCurva.vertices[iteracao].z;
+				mobs[i].sprite.position.set(mobs[i].x, mobs[i].y, mobs[i].z);
 				iteracao++;
 			}
 		}
@@ -220,11 +221,10 @@ function mobSpawn(position, value){
 		}
 
 		if(auxiliarBee < 2){
-			flyingBee.position.set(position, megaman.y+50, megaman.z - 5);
-			mobs.push(flyingBee);
-			mobsAnim.push(flyingBeeAnim);
-			mobHP.push(2);
-			scene.add(flyingBee);
+			var flyingB = {x: position, y: megaman.y+5, z: megaman.z - 5, hp: 2, sprite: flyingBee, anima: flyingBeeAnim};
+			flyingB.sprite.position.set(flyingB.x, flyingB.y, flyingB.z);
+			mobs.push(flyingB);
+			scene.add(flyingB.sprite);
 		}
 
 		curvaBezier = new THREE.QuadraticBezierCurve3(
