@@ -2,6 +2,7 @@
 var mobs = []; //VETOR PARA ALOCAÇÃO DE TODOS OS MONSTROS ATIVOS NA CENA
 var mobsAnim = [];
 var mobShot = [];
+var mobHP = [];
 var shots = []; //VETOR PARA ALOCAÇÃO DE TODOS PROJÉTEIS DISPARADOS NA CENA
 //-------------------VETORES DE CONTROLE DE OBJETOS----------------------
 
@@ -225,7 +226,7 @@ function update()//ITERAÇÕES DO LOOP
     }
 
     if(camera.position.x > -3400){
-      mobSpawn(-3350, 2);
+      mobSpawn(-3300, 2);
     }
 
     animationPic.translateX( moveDistance );//move o megaman

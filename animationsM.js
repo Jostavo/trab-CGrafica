@@ -11,11 +11,11 @@ var standMegamanMaterial, walkMegamanMaterial, jumpMegamanMaterial, dashMegamanM
 //objetos intermediários de animação de textura
 var standMegamanAnim, walkMegamanAnim, jumpMegamanAnim, dashMegamanAnim, pewpewMegamanAnim, shotAnim, shotPoppingAnim, pewRunMegamanAnim;
 
-var standMisseler, attackingMisseler;
-var standMisselerTexture, attackingMisselerTexture;
-var standMisselerMaterial, attackingMisselerMaterial;
-var standMisselerAnim, attackingMisselerAnim;
-var misselerPlane,attMisselerPlane;
+var standMisseler, attackingMisseler, flyingBee;
+var standMisselerTexture, attackingMisselerTexture, flyingBeeTexture;
+var standMisselerMaterial, attackingMisselerMaterial, flyingBeeMaterial;
+var standMisselerAnim, attackingMisselerAnim, flyingBeeAnim;
+var misselerPlane,attMisselerPlane, flyingBeePlane;
 //-------------------OBJETOS GLOBAIS DE ANIMAÇÃO----------------------
 
 
@@ -50,6 +50,9 @@ function initAnim(x, y, z)//FUNÇÃO DE CONTROLE DE ANIMAÇÃO
 		standMisselerTexture.minFilter = THREE.LinearFilter;
 		attackingMisselerTexture = new THREE.ImageUtils.loadTexture('sprites/mmx/firesseler.png');
 		attackingMisselerTexture.minFilter = THREE.LinearFilter;
+
+		flyingBeeTexture = new THREE.ImageUtils.loadTexture('sprites/mmx/flyingbee.png');
+		flyingBeeTexture.minFilter = THREE.LinearFilter;
 		//------------------------CONTROLE DE TEXTURA-------------------------------
 
 		//-------------------CONTROLE DE ANIMAÇÃO DE TEXTURA-------------------------
@@ -65,6 +68,7 @@ function initAnim(x, y, z)//FUNÇÃO DE CONTROLE DE ANIMAÇÃO
 		pewRunMegamanAnim = new TextureAnimator(pewRunMegamanTexture, 1, 11, 11, 30);//'atirando e correndo'
 		standMisselerAnim = new TextureAnimator(standMisselerTexture, 1, 2, 2, 30);
 		attackingMisselerAnim = new TextureAnimator(attackingMisselerTexture, 1, 10, 10, 30);
+		flyingBeeAnim = new TextureAnimator(flyingBeeTexture, 1, 6, 6, 30);
 		//-------------------CONTROLE DE ANIMAÇÃO DE TEXTURA------------------------
 
 		//-------------------MATERIAL DE ANIMAÇÃO DE TEXTURA------------------------
@@ -88,6 +92,8 @@ function initAnim(x, y, z)//FUNÇÃO DE CONTROLE DE ANIMAÇÃO
 			map: standMisselerTexture, side: THREE.DoubleSide, transparent: true} );
 		attackingMisselerMaterial = new THREE.MeshBasicMaterial({
 			map: attackingMisselerTexture, side: THREE.DoubleSide, transparent: true} );
+		flyingBeeMaterial = new THREE.MeshBasicMaterial({
+			map: flyingBeeTexture, side: THREE.DoubleSide, transparent: true} );
 		//-------------------MATERIAL DE ANIMAÇÃO DE TEXTURA------------------------
 
     //-------------------GEOMETRIA DA ANIMAÇÃO---------------------------
@@ -95,6 +101,7 @@ function initAnim(x, y, z)//FUNÇÃO DE CONTROLE DE ANIMAÇÃO
 		shotPlane = new THREE.PlaneGeometry( 18, 15 );
 		misselerPlane = new THREE.PlaneGeometry( 48, 58 );
 		attMisselerPlane = new THREE.PlaneGeometry( 52, 62 );
+		flyingBeePlane = new THREE.PlaneGeometry( 31, 32 );
 		//-------------------GEOMETRIA DA ANIMAÇÃO---------------------------
 
     //-------------------FUSÃO DE ANIMAÇÃO DE TEXTURA---------------------------
@@ -106,6 +113,7 @@ function initAnim(x, y, z)//FUNÇÃO DE CONTROLE DE ANIMAÇÃO
 		pewRunMegaman = new THREE.Mesh(megamanPlane, pewRunMegamanMaterial);
 		standMisseler = new THREE.Mesh(misselerPlane, standMisselerMaterial);
 		attackingMisseler = new THREE.Mesh(attMisselerPlane, attackingMisselerMaterial);
+		flyingBee = new THREE.Mesh(flyingBeePlane, flyingBeeMaterial);
 		//VERIFICAR se faltou mesh do tiro
 		//-------------------FUSÃO DE ANIMAÇÃO DE TEXTURA---------------------------
 
@@ -116,6 +124,7 @@ function initAnim(x, y, z)//FUNÇÃO DE CONTROLE DE ANIMAÇÃO
 		pewRunMegaman.scale.set(0.6,0.6,0.6);
 		standMisseler.scale.set(0.6,0.6,0.6);
 		attackingMisseler.scale.set(0.6,0.6,0.6);
+		flyingBee.scale.set(0.6,0.6,0.6);
 		//shotPopping.scale.set(0.035,0.035,0.035);
 		//-------------------ESCALA DE TAMANHO DE ANIMAÇÃO--------------------------
 
@@ -168,7 +177,7 @@ function animaMob(){
 }
 
 function animaMissiler(){
-	
+
 }
 
 function animaFlying(){
@@ -177,6 +186,7 @@ function animaFlying(){
 
 function mobSpawn(position, value){
 	var auxiliar = false;
+	var auxiliarBee = 0;
 	var i;
 
 	if(value == 1){ //Spawna Misseler
@@ -190,20 +200,22 @@ function mobSpawn(position, value){
 			standMisseler.position.set(position, megaman.y+5, megaman.z - 5);
 			mobs.push(standMisseler);
 			mobsAnim.push(standMisselerAnim);
+			mobHP.push(7);
 			scene.add(standMisseler);
 			standMisselerClock = 0;
 		}
 	}else if(value == 2){ //Spawna Flying bee
 		for(i = 0; i < mobs.length; i++){
 			if(mobs[i] == flyingBee){
-				auxiliar = true;
+				auxiliarBee++;
 			}
 		}
 
-		if(auxiliar != true){
-			flyingBee.position.set( );
+		if(auxiliarBee < 2){
+			flyingBee.position.set(position, megaman.y+25, megaman.z - 5);
 			mobs.push(flyingBee);
 			mobsAnim.push(flyingBeeAnim);
+			mobHP.push(2);
 			scene.add(flyingBee);
 		}
 	}
