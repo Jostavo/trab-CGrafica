@@ -233,7 +233,7 @@ function mobSpawn(position, value){
 		new THREE.Vector3( megaman.x, megaman.y, megaman.z - 5 ));
 
 		pontosCurva = new THREE.Geometry();
-		pontosCurva.vertices = curve.getPoints(10);
+		pontosCurva.vertices = curvaBezier.getPoints(10);
 		iteracao = 0;
 	}
 }
