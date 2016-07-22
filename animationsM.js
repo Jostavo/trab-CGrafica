@@ -209,7 +209,7 @@ function mobSpawn(position, value){
 			}
 		}
 
-		if(auxiliar != true)
+		if(auxiliar != true){
 			var misseler = {x: position, y: megaman.y+5, z: megaman.z - 5, hp: 7, sprite: standMisseler, anima: standMisselerAnim, clock: 0};
 			misseler.sprite.position.set(misseler.x, misseler.y, misseler.z);
 			mobs.push(misseler);
