@@ -173,6 +173,7 @@ function changeSide(){ //FUNÇÃO de controle de espelhamento da animação
 function animaMob(){
 	var i;
 	for(i = 0; i < mobs.length; i++){
+		changeSide();
     mobs[i].anima.update(updateClock);
 
 		if(mobs[i].sprite == flyingBee){
