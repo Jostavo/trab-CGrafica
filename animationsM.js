@@ -226,7 +226,7 @@ function mobSpawn(position, value){
 			scene.add(flyingBee);
 		}
 
-		var curvaBezier = new THREE.QuadraticBezierCurve3(
+		curvaBezier = new THREE.QuadraticBezierCurve3(
 		new THREE.Vector3( position, megaman.y+50, megaman.z - 5),
 		new THREE.Vector3( THREE.Math.randFloat(megaman.x,position-10), megaman.y+20, megaman.z - 5 ),
 		new THREE.Vector3( megaman.x, megaman.y, megaman.z - 5 ));
