@@ -18,6 +18,7 @@ var standMisselerAnim, attackingMisselerAnim, flyingBeeAnim;
 var misselerPlane,attMisselerPlane, flyingBeePlane;
 //-------------------OBJETOS GLOBAIS DE ANIMAÇÃO----------------------
 
+var curvaBezier, pontosCurva, iteracao;
 
 //-------------------OBJETOS GLOBAIS DE CONTROLE DE ANIMAÇÃO----------------------
 var shooting = false;
@@ -173,6 +174,12 @@ function animaMob(){
 	for(var i = 0; i < mobsAnim.lenght; i++){
     auxiliar = mobsAnim[i];
     auxiliar.update(updateClock);
+
+		if(auxiliar == flyingBee){
+			if(iteracao < 10){
+				flyingBee.position.set(pontosCurva.vertices[iteracao].x, pontosCurva.vertices[iteracao].y, pontosCurva.vertices[iteracao].z);
+				iteracao++;
+		}
   }
 }
 
@@ -212,12 +219,21 @@ function mobSpawn(position, value){
 		}
 
 		if(auxiliarBee < 2){
-			flyingBee.position.set(position, megaman.y+25, megaman.z - 5);
+			flyingBee.position.set(position, megaman.y+50, megaman.z - 5);
 			mobs.push(flyingBee);
 			mobsAnim.push(flyingBeeAnim);
 			mobHP.push(2);
 			scene.add(flyingBee);
 		}
+
+		var curvaBezier = new THREE.QuadraticBezierCurve3(
+		new THREE.Vector3( position, megaman.y+50, megaman.z - 5),
+		new THREE.Vector3( THREE.Math.randFloat(megaman.x,position-10), megaman.y+20, megaman.z - 5 ),
+		new THREE.Vector3( megaman.x, megaman.y, megaman.z - 5 ));
+
+		pontosCurva = new THREE.Geometry();
+		pontosCurva.vertices = curve.getPoints(10);
+		iteracao = 0;
 	}
 }
 
