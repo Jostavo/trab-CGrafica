@@ -174,11 +174,10 @@ function animaMob(){
 	var i;
 
 	for(i = 0; i < mobs.length; i++){
-		changeSide();
     mobs[i].anima.update(updateClock);
 
 		if(mobs[i].sprite == flyingBee){
-			if(iteracao < 10){
+			if(iteracao < 100){
 				mobs[i].x = pontosCurva.vertices[iteracao].x;
 				mobs[i].y = pontosCurva.vertices[iteracao].y;
 				mobs[i].z = pontosCurva.vertices[iteracao].z;
@@ -235,7 +234,7 @@ function mobSpawn(position, value){
 		new THREE.Vector3( megaman.x, megaman.y, megaman.z - 5 ));
 
 		pontosCurva = new THREE.Geometry();
-		pontosCurva.vertices = curvaBezier.getPoints(10);
+		pontosCurva.vertices = curvaBezier.getPoints(100);
 		iteracao = 0;
 	}
 }
