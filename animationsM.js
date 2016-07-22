@@ -226,16 +226,16 @@ function mobSpawn(position, value){
 			flyingB.sprite.position.set(flyingB.x, flyingB.y, flyingB.z);
 			mobs.push(flyingB);
 			scene.add(flyingB.sprite);
+
+			curvaBezier = new THREE.QuadraticBezierCurve3(
+			new THREE.Vector3( position, megaman.y+50, megaman.z - 5),
+			new THREE.Vector3( THREE.Math.randFloat(megaman.x,position-10), megaman.y+20, megaman.z - 5 ),
+			new THREE.Vector3( megaman.x, megaman.y, megaman.z - 5 ));
+
+			pontosCurva = new THREE.Geometry();
+			pontosCurva.vertices = curvaBezier.getPoints(100);
+			iteracao = 0;
 		}
-
-		curvaBezier = new THREE.QuadraticBezierCurve3(
-		new THREE.Vector3( position, megaman.y+50, megaman.z - 5),
-		new THREE.Vector3( THREE.Math.randFloat(megaman.x,position-10), megaman.y+20, megaman.z - 5 ),
-		new THREE.Vector3( megaman.x, megaman.y, megaman.z - 5 ));
-
-		pontosCurva = new THREE.Geometry();
-		pontosCurva.vertices = curvaBezier.getPoints(100);
-		iteracao = 0;
 	}
 }
 
