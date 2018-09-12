@@ -1,4 +1,4 @@
-﻿###Trabalho - Computação Gráfica
+Trabalho - Computação Gráfica
 ---
 
 Integrante: 
@@ -17,7 +17,7 @@ Integrante:
 
 ---
 
-#####Parte 1
+##### Parte 1
 **Especificações:**
 - Definir a proposta de todo o trabalho, incluindo objetivo, interações do usuário, animações, ...
 	- Utilizar pelo menos 4 objetos (modelos diferentes)
@@ -29,7 +29,7 @@ Integrante:
 
 ---
 
-#####Parte 2
+##### Parte 2
 **Especificações:**
 A partir da implementação da etapa 1, amplie para:
 - Incluir um modelo de iluminação (implementado em GLSL) em pelo menos um dos objetos que participe de uma animação
