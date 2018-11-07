@@ -1,15 +1,15 @@
-Trabalho - Computação Gráfica
----
+﻿Trabalho - Computação Gráfica
+=======
 
-Integrante: 
+## Integrantes
 - Gustavo Almeida Rodrigues - [@darkkgreen](https://github.com/darkkgreen)
 - João Vitor de Sá - [@joaovsa](https://github.com/joaovsa)
 
----
+## Infos
 
 **Tema**: Jogo ou animação interativa
 
-**Entregar**: código fonte, relatório (PDF) com breve descrição do desenvolvimento do projeto (incluindo divisão de tarefas, dificuldades, bibliotecas utilizadas, ...). Apenas uma submissão por grupo.
+**Entrega**: código fonte, relatório (PDF) com breve descrição do desenvolvimento do projeto (incluindo divisão de tarefas, dificuldades, bibliotecas utilizadas, ...). Apenas uma submissão por grupo.
 
 **Avaliação**: 80% atendimento às especificações, 15% relatório e 5% criatividade/qualidade visual.
 
@@ -17,7 +17,7 @@ Integrante:
 
 ---
 
-##### Parte 1
+## Parte 1
 **Especificações:**
 - Definir a proposta de todo o trabalho, incluindo objetivo, interações do usuário, animações, ...
 	- Utilizar pelo menos 4 objetos (modelos diferentes)
@@ -29,7 +29,7 @@ Integrante:
 
 ---
 
-##### Parte 2
+## Parte 2
 **Especificações:**
 A partir da implementação da etapa 1, amplie para:
 - Incluir um modelo de iluminação (implementado em GLSL) em pelo menos um dos objetos que participe de uma animação
