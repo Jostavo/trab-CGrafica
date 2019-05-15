@@ -1,11 +1,17 @@
+var scene, camera, renderer, keyboard;
+
+var updateClock;
+
+var clock = new THREE.Clock();
+keyboard = new KeyboardState();
+
+// daqui pra cima é o main
+
 var mobs = [];
 var mobShot = [];
 var shots = [];
 
-var scene, camera, renderer, keyboard;
-
 var animation, animationPic;
-var updateClock;
 
 var standMisselerClock;
 var attackingMisselerClock;
@@ -15,9 +21,6 @@ var backgroundTexture, foregroundTexture;
 var backgroundPlane, foregroundPlane;
 var backgroundMaterial, foregroundMaterial;
 
-var clock = new THREE.Clock();
-keyboard = new KeyboardState();
-
 init();
 animate();
 
@@ -26,9 +29,6 @@ function init() {
   var viewAngle = 90;
   var near = 0.1;
   var far = 2000;
-
-  backgroundTexture = new THREE.ImageUtils.loadTexture('sprites/stages/intro_stage/novobg.png');
-  foregroundTexture = new THREE.ImageUtils.loadTexture('sprites/stages/intro_stage/foreground.png');
 
   renderer = new THREE.WebGLRenderer();
   renderer.setSize(ScreenWidth, ScreenHeight);
@@ -42,6 +42,12 @@ function init() {
   scene.add(camera);
   camera.position.set(-3730, 130, 100);
   camera.lookAt(-3730, 130, 100);
+
+  // backgroundTexture = current_stage.backgroundTexture
+  // foregroundTexture = current_stage.foregroundTexture
+
+  backgroundTexture = new THREE.ImageUtils.loadTexture('sprites/stages/intro_stage/novobg.png'); //padronizar
+  foregroundTexture = new THREE.ImageUtils.loadTexture('sprites/stages/intro_stage/foreground.png'); //padronizar
   
   backgroundMaterial = new THREE.MeshBasicMaterial(
     { map: backgroundTexture, side: THREE.DoubleSide, transparent: true }  );
@@ -71,7 +77,7 @@ function init() {
 
 function animate()
 {
-    requestAnimationFrame( animate );
+    requestAnimationFrame(animate);
 	  renderer.render(scene, camera);
 	  update();
 }
@@ -80,7 +86,7 @@ function update()
 {
   var auxiliar;
   var delta = clock.getDelta(); 
-  var moveDistance = 50 * delta; 
+  var moveDistance = 70 * delta; 
 
   keyboard.update(); 
   animation.update(updateClock); 

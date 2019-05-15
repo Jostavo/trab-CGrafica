@@ -67,7 +67,7 @@ function initAnim(x, y, z)
     shotAnim = new TextureAnimator(shotTexture, 1, 1, 1, 30);
     shotPoppingAnim = new TextureAnimator(shotPoppingTexture, 1, 3, 3, 30);
     pewRunMegamanAnim = new TextureAnimator(pewRunMegamanTexture, 1, 11, 11, 30);
-    standMisselerAnim = new TextureAnimator(standMisselerTexture, 1, 2, 2, 30);
+    standMisselerAnim = new TextureAnimator(standMisselerTexture, 1, 2, 2, 600);
     attackingMisselerAnim = new TextureAnimator(attackingMisselerTexture, 1, 10, 10, 30);
     flyingBeeAnim = new TextureAnimator(flyingBeeTexture, 1, 6, 6, 30);
     
@@ -305,7 +305,7 @@ function animaShots(){
 }
 
 /*FUNÇÃO padrão de animação de textura
-Extraída de: https:*/
+Extraída de: https://stemkoski.github.io/Three.js/Texture-Animation.html */
 function TextureAnimator(texture, tilesHoriz, tilesVert, numTiles, tileDispDuration)
 {
   this.currentTile = 0;
